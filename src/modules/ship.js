@@ -15,7 +15,7 @@ const Ship = (length) => {
     });
   }
 
-  return { hit, hitPositions, isHit, isSunk };
+  return { hit, hitPositions, isHit, isSunk, length };
 };
 
 export default Ship;
