@@ -4,14 +4,14 @@ describe('Ship', () => {
   test('Creating ship of length 3, has hit positions set to "false"', () => {
     const destroyer = Ship(3);
     const expected = [false, false, false];
-    expect(destroyer.hitPositions).toEqual(expect.arrayContaining(expected));
+    expect(destroyer.getHits()).toEqual(expect.arrayContaining(expected));
   });
 
   test('Hitting ship of length 3 at position 2 gets registered', () => {
     const destroyer = Ship(3);
     destroyer.hit(1);
     const expected = [false, true, false];
-    expect(destroyer.hitPositions).toEqual(expect.arrayContaining(expected));
+    expect(destroyer.getHits()).toEqual(expect.arrayContaining(expected));
   });
 
   test('Ship of length 3 was not hit, isHit should be false', () => {
