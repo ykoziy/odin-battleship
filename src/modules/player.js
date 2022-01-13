@@ -35,7 +35,7 @@ class Player {
     if (cell.shipType !== undefined) {
       const hitIndex = cell.index;
       const ship = enemyBoard.fleet[cell.shipType];
-      return ship.hitPositions[hitIndex] === true;
+      return ship.isPositionHit(hitIndex) === true;
     }
     return false;
   }
