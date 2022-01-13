@@ -19,7 +19,11 @@ const Ship = (length) => {
     return hitPositions[index] == true;
   }
 
-  return { hit, hitPositions, isHit, isSunk, length, isPositionHit };
+  function getHits() {
+    return hitPositions;
+  }
+
+  return { hit, hitPositions, isHit, isSunk, length, isPositionHit, getHits };
 };
 
 export default Ship;
