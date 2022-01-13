@@ -23,7 +23,7 @@ const Ship = (length) => {
     return hitPositions;
   }
 
-  return { hit, hitPositions, isHit, isSunk, length, isPositionHit, getHits };
+  return { hit, isHit, isSunk, length, isPositionHit, getHits };
 };
 
 export default Ship;
