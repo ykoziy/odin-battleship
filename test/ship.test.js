@@ -44,4 +44,12 @@ describe('Ship', () => {
     destroyer.hit(1);
     expect(destroyer.isPositionHit(1)).toEqual(true);
   });
+
+  test('Hitting ship of length 3 at position 2, getHits should return [false, true, false]', () => {
+    const destroyer = Ship(3);
+    destroyer.hit(1);
+    expect(destroyer.getHits()).toEqual(
+      expect.arrayContaining([false, true, false]),
+    );
+  });
 });
