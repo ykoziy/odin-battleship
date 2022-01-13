@@ -1,4 +1,3 @@
-import { SingleEntryPlugin } from 'webpack';
 import Ship from './ship';
 
 const Gameboard = () => {
