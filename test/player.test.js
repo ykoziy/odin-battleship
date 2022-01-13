@@ -17,7 +17,7 @@ describe('Player class', () => {
 
     it('should allow player to attack opponents board, enemy ship hit should be recorded', () => {
       playerAlice.attack(0, 1, boardBob);
-      expect(boardBob.fleet[0].hitPositions).toEqual(
+      expect(boardBob.fleet[0].getHits()).toEqual(
         expect.arrayContaining([false, true, false, false, false]),
       );
     });
@@ -65,7 +65,7 @@ describe('Player class', () => {
       playerBob.attack(null, null, boardAlice);
 
       expect(
-        boardAlice.fleet[boardAlice.board[1][0].shipType].hitPositions[1],
+        boardAlice.fleet[boardAlice.board[1][0].shipType].isPositionHit(1),
       ).toEqual(true);
     });
   });
