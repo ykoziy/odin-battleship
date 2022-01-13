@@ -38,4 +38,10 @@ describe('Ship', () => {
     destroyer.hit(1);
     expect(destroyer.isSunk()).toEqual(false);
   });
+
+  test('Hitting ship of length 3 at position 2, isPositionHit should return true', () => {
+    const destroyer = Ship(3);
+    destroyer.hit(1);
+    expect(destroyer.isPositionHit(2)).toEqual(true);
+  });
 });
