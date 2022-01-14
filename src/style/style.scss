@@ -55,6 +55,10 @@ main {
     background-color: rgb(127, 125, 241);
   }
 
+  .board-cell * {
+    pointer-events: none;
+  }
+
   .hit {
     background-color: red;
     border-radius: 50%;
