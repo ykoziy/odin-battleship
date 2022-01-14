@@ -90,6 +90,17 @@ describe('Gameboard', () => {
       );
     });
 
+    it('should record a miss one time only when hitting (1, 1) since it misses the horizontal carrier (5 squares) at (2, 1)', () => {
+      testBoard.placeShip(2, 1, 'horizontal', 0);
+      testBoard.recieveAttack(1, 1);
+      testBoard.recieveAttack(1, 1);
+      testBoard.recieveAttack(1, 1);
+      expect(testBoard.missedShots.length).toEqual(1);
+      expect(testBoard.missedShots).toEqual(
+        expect.arrayContaining([{ x: 1, y: 1 }]),
+      );
+    });
+
     test('should register a hit when hitting (5, 1) to the carrier (5 squares) at (2, 1)', () => {
       testBoard.placeShip(2, 1, 'horizontal', 0);
       testBoard.recieveAttack(5, 1);
