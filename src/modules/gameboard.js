@@ -74,9 +74,19 @@ const Gameboard = () => {
     }
   }
 
+  function isAlreadyMissed(x, y) {
+    return missedShots.some((coord) => {
+      if (coord.x === x && coord.y === y) {
+        return true;
+      }
+    });
+  }
+
   function recieveAttack(x, y) {
     if (board[y][x].shipType === undefined) {
-      missedShots.push({ x: x, y: y });
+      if (!isAlreadyMissed(x, y)) {
+        missedShots.push({ x: x, y: y });
+      }
     } else {
       const shipAttacked = fleet[board[y][x].shipType];
       shipAttacked.hit(board[y][x].index);
