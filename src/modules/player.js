@@ -43,11 +43,8 @@ class Player {
   #cpuAttack(enemyBoard) {
     const cpuMove = this.#getRandomMove();
 
-    const isMissed = enemyBoard.missedShots.some((coord) => {
-      if (coord.x === cpuMove.x && coord.y === cpuMove.y) {
-        return true;
-      }
-    });
+    const isMissed = enemyBoard.isAlreadyMissed(cpuMove.x, cpuMove.y);
+
     const cell = enemyBoard.board[cpuMove.y][cpuMove.x];
 
     if (isMissed || this.#isCellAlreadyHit(cell, enemyBoard)) {
