@@ -54,11 +54,7 @@ const GameboardDOM = (boardElementName) => {
             setCell(x, y, 'ship');
           }
         } else {
-          const isMissed = gameBoard.missedShots.some((coord) => {
-            if (coord.x === x && coord.y === y) {
-              return true;
-            }
-          });
+          const isMissed = gameBoard.isAlreadyMissed(x, y);
           if (isMissed) {
             setCell(x, y, 'miss');
           }
