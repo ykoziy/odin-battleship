@@ -99,7 +99,15 @@ const Gameboard = () => {
     });
   }
 
-  return { placeShip, board, recieveAttack, missedShots, fleet, isFleetSunk };
+  return {
+    placeShip,
+    board,
+    recieveAttack,
+    missedShots,
+    fleet,
+    isFleetSunk,
+    isAlreadyMissed,
+  };
 };
 
 export default Gameboard;
