@@ -93,13 +93,14 @@ const Gameboard = () => {
   }
 
   function recieveAttack(x, y) {
-    if (board[y][x].shipType === undefined) {
+    const cell = board[y][x];
+    if (cell.shipType === undefined) {
       if (!isAlreadyMissed(x, y)) {
         missedShots.push({ x: x, y: y });
       }
     } else {
-      const shipAttacked = fleet[board[y][x].shipType];
-      shipAttacked.hit(board[y][x].index);
+      const shipAttacked = fleet[cell.shipType];
+      shipAttacked.hit(cell.index);
     }
   }
 
