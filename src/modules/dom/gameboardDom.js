@@ -7,6 +7,12 @@ const GameboardDOM = (boardElementName) => {
     });
   }
 
+  function removeAllMoveHandlers(handleMove) {
+    gameBoard.querySelectorAll('.board-cell').forEach((element) => {
+      element.removeEventListener('click', handleMove);
+    });
+  }
+
   function drawCell(x, y) {
     let cell = document.createElement('div');
     cell.className = 'board-cell';
@@ -63,7 +69,7 @@ const GameboardDOM = (boardElementName) => {
     }
   }
 
-  return { drawEmptyBoard, updateBoard, addMoveHandler };
+  return { drawEmptyBoard, updateBoard, addMoveHandler, removeAllMoveHandlers };
 };
 
 export default GameboardDOM;
