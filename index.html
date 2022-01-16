@@ -8,13 +8,25 @@
   </head>
   <body>
     <header><h1>Battleship</h1></header>
-    <main>
-      <div id="player-board-container">
-        <h2>Player One</h2>
+    <main id ='game-start'>
+    </main>
+
+    <main id ='ship-placement'>
+      <div id='ship-selection'>
+        <div id='ships'></div>
+      </div>
+      <div id='ship-board-container'>
+        <div class='ship-board'></div>
+      </div>      
+    </main>
+
+    <main id='game'>
+      <div id='player-board-container'>
+        <h2 id='player-one-name'>Player One</h2>
         <div class='game-board'></div>
       </div>
-      <div id="enemy-board-container">
-        <h2>Player Two</h2>
+      <div id='enemy-board-container'>
+        <h2 id='player-two-name'>Player Two</h2>
         <div class='game-board'></div>
       </div>
     </main>
