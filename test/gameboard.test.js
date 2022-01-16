@@ -155,4 +155,89 @@ describe('Gameboard', () => {
       expect(board.isFleetSunk()).toEqual(true);
     });
   });
+
+  describe('getPossibleMoves() test', () => {
+    describe('empty board', () => {
+      let testBoard = Gameboard();
+
+      beforeEach(() => {
+        testBoard = Gameboard();
+      });
+
+      it('should generate an array ([3, 0],[3, 2],[2, 1],[4, 1]) for best moves at (3, 1)', () => {
+        expect(testBoard.getPossibleAttacks(3, 1).length).toEqual(4);
+        expect(testBoard.getPossibleAttacks(3, 1)).toEqual(
+          expect.arrayContaining([
+            [3, 0],
+            [3, 2],
+            [2, 1],
+            [4, 1],
+          ]),
+        );
+      });
+
+      it('should generate an array ([8, 7],[7, 8]) for best moves at (9, 9)', () => {
+        expect(testBoard.getPossibleAttacks(9, 9).length).toEqual(2);
+        expect(testBoard.getPossibleAttacks(9, 9)).toEqual(
+          expect.arrayContaining([
+            [8, 9],
+            [9, 8],
+          ]),
+        );
+      });
+
+      it('should generate an array ([1, 0],[0, 1]) for best moves at (0, 0)', () => {
+        expect(testBoard.getPossibleAttacks(0, 0).length).toEqual(2);
+        expect(testBoard.getPossibleAttacks(0, 0)).toEqual(
+          expect.arrayContaining([
+            [1, 0],
+            [0, 1],
+          ]),
+        );
+      });
+
+      it('should generate an array ([1, 0],[0, 1]) for best moves at (8, 9)', () => {
+        expect(testBoard.getPossibleAttacks(8, 9).length).toEqual(3);
+        expect(testBoard.getPossibleAttacks(8, 9)).toEqual(
+          expect.arrayContaining([
+            [7, 9],
+            [9, 9],
+            [8, 8],
+          ]),
+        );
+      });
+    });
+
+    describe('board with horizontal carrier at (0,0), (0,3) is hit and a miss at (2, 1)', () => {
+      let testBoard = Gameboard();
+
+      beforeEach(() => {
+        testBoard = Gameboard();
+        testBoard.placeShip(0, 0, 'horizontal', 0);
+        testBoard.recieveAttack(3, 0);
+        testBoard.recieveAttack(2, 1);
+      });
+
+      it('should generate an array ([3, 2],[4, 1]) for best moves at (3, 1)', () => {
+        expect(testBoard.getPossibleAttacks(3, 1).length).toEqual(2);
+        expect(testBoard.getPossibleAttacks(3, 1)).toEqual(
+          expect.arrayContaining([
+            [3, 2],
+            [4, 1],
+          ]),
+        );
+      });
+
+      it('should generate an array ([3, 1],[2, 0],[4,0]) for best moves at (3, 0)', () => {
+        expect(testBoard.getPossibleAttacks(3, 0).length).toEqual(3);
+        expect(testBoard.getPossibleAttacks(3, 0)).toEqual(
+          expect.arrayContaining([
+            [3, 1],
+            [2, 0],
+            [4, 0],
+          ]),
+        );
+      });
+    });
+  });
 });

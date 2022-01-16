@@ -82,6 +82,15 @@ const Gameboard = () => {
     });
   }
 
+  function isAlreadyHit(x, y) {
+    const cell = board[y][x];
+    if (cell.shipType !== undefined) {
+      const ship = fleet[cell.shipType];
+      return ship.isPositionHit(cell.index);
+    }
+    return false;
+  }
+
   function recieveAttack(x, y) {
     if (board[y][x].shipType === undefined) {
       if (!isAlreadyMissed(x, y)) {
@@ -91,6 +100,34 @@ const Gameboard = () => {
       const shipAttacked = fleet[board[y][x].shipType];
       shipAttacked.hit(board[y][x].index);
     }
+  }
+
+  function getPossibleAttacks(x, y) {
+    const movesArray = [];
+
+    const up = [x, y + 1];
+    movesArray.push(up);
+    const down = [x, y - 1];
+    movesArray.push(down);
+    const left = [x - 1, y];
+    movesArray.push(left);
+    const right = [x + 1, y];
+    movesArray.push(right);
+
+    const result = movesArray.filter((coord) => {
+      const inRange =
+        (coord[0] <= 9 && coord[0] >= 0 && coord[1] <= 9 && coord[1] >= 0) ===
+        true;
+      if (inRange) {
+        if (
+          !isAlreadyMissed(coord[0], coord[1]) &&
+          !isAlreadyHit(coord[0], coord[1])
+        ) {
+          return true;
+        }
+      }
+    });
+    return result;
   }
 
   function isFleetSunk() {
@@ -107,6 +144,7 @@ const Gameboard = () => {
     fleet,
     isFleetSunk,
     isAlreadyMissed,
+    getPossibleAttacks,
   };
 };
 
