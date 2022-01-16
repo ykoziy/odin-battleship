@@ -31,6 +31,18 @@ main {
   gap: 150px;
 }
 
+#game {
+  display: flex;
+}
+
+#game-start {
+  display: none;
+}
+
+#ship-placement {
+  display: none;
+}
+
 #player-board-container,
 #enemy-board-container {
   display: flex;
