@@ -1,5 +1,7 @@
 const Ship = (length) => {
   let hitPositions = new Array(length).fill(false);
+  let direction = '',
+    position = [];
 
   function hit(index) {
     hitPositions[index] = true;
@@ -23,7 +25,34 @@ const Ship = (length) => {
     return hitPositions;
   }
 
-  return { hit, isHit, isSunk, length, isPositionHit, getHits };
+  function setDirection(dir) {
+    direction = dir;
+  }
+
+  function getDirection() {
+    return direction;
+  }
+
+  function setPosition(x, y) {
+    position = [x, y];
+  }
+
+  function getPosition() {
+    return position;
+  }
+
+  return {
+    hit,
+    isHit,
+    isSunk,
+    length,
+    isPositionHit,
+    getHits,
+    setDirection,
+    getDirection,
+    setPosition,
+    getPosition,
+  };
 };
 
 export default Ship;
