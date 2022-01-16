@@ -58,16 +58,17 @@ const Gameboard = () => {
   }
 
   function placeShip(x, y, direction, shipType) {
-    if (!isMoveValid(x, y, direction, fleet[shipType].length)) {
+    const shipLength = fleet[shipType].length;
+    if (!isMoveValid(x, y, direction, shipLength)) {
       return;
     }
     if (direction === 'horizontal') {
-      for (let i = 0; i < fleet[shipType].length; i++) {
+      for (let i = 0; i < shipLength; i++) {
         board[y][x + i].shipType = shipType;
         board[y][x + i].index = i;
       }
     } else if (direction === 'vertical') {
-      for (let i = 0; i < fleet[shipType].length; i++) {
+      for (let i = 0; i < shipLength; i++) {
         board[y + i][x].shipType = shipType;
         board[y + i][x].index = i;
       }
