@@ -32,7 +32,7 @@ main {
 }
 
 #game {
-  display: flex;
+  display: none;
 }
 
 #game-start {
@@ -40,18 +40,20 @@ main {
 }
 
 #ship-placement {
-  display: none;
+  display: flex;
 }
 
 #player-board-container,
-#enemy-board-container {
+#enemy-board-container,
+#ship-board-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.game-board {
+.game-board,
+.ship-board {
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   background-color: black;
@@ -89,5 +91,55 @@ main {
     background-color: lightgrey;
     width: 100%;
     height: 100%;
+  }
+}
+
+#ship-selection {
+  display: flex;
+
+  #ships {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    #ship-carrier {
+      background-color: rgb(127, 125, 241);
+      border: 2px solid black;
+      height: 40px;
+      width: 40px * 5;
+      cursor: move;
+    }
+
+    #ship-battleship {
+      background-color: rgb(127, 125, 241);
+      border: 2px solid black;
+      height: 40px;
+      width: 40px * 4;
+      cursor: move;
+    }
+
+    #ship-cruiser {
+      background-color: rgb(127, 125, 241);
+      border: 2px solid black;
+      height: 40px;
+      width: 40px * 3;
+      cursor: move;
+    }
+
+    #ship-submarine {
+      background-color: rgb(127, 125, 241);
+      border: 2px solid black;
+      height: 40px;
+      width: 40px * 3;
+      cursor: move;
+    }
+
+    #ship-destroyer {
+      background-color: rgb(127, 125, 241);
+      border: 2px solid black;
+      height: 40px;
+      width: 40px * 2;
+      cursor: move;
+    }
   }
 }
