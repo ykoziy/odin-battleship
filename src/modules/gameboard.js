@@ -61,7 +61,7 @@ const Gameboard = () => {
     const ship = fleet[shipType];
     const shipLength = fleet[shipType].length;
     if (!isMoveValid(x, y, direction, shipLength)) {
-      return;
+      return false;
     }
     if (direction === 'horizontal') {
       ship.setDirection('horizontal');
@@ -78,6 +78,7 @@ const Gameboard = () => {
         board[y + i][x].index = i;
       }
     }
+    return true;
   }
 
   function removeShip(shipType) {
