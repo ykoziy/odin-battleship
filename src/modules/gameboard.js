@@ -80,6 +80,25 @@ const Gameboard = () => {
     }
   }
 
+  function removeShip(shipType) {
+    const ship = fleet[shipType];
+    const shipLength = fleet[shipType].length;
+    const pos = ship.getPosition();
+    const x = pos[0];
+    const y = pos[1];
+    if (ship.getDirection() === 'horizontal') {
+      for (let i = 0; i < shipLength; i++) {
+        board[y][x + i].shipType = undefined;
+        board[y][x + i].index = undefined;
+      }
+    } else if (ship.getDirection() === 'vertical') {
+      for (let i = 0; i < shipLength; i++) {
+        board[y + i][x].shipType = undefined;
+        board[y + i][x].index = undefined;
+      }
+    }
+  }
+
   function isAlreadyMissed(x, y) {
     return missedShots.some((coord) => {
       if (coord.x === x && coord.y === y) {
@@ -152,6 +171,7 @@ const Gameboard = () => {
     isFleetSunk,
     isAlreadyMissed,
     getPossibleAttacks,
+    removeShip,
   };
 };
 

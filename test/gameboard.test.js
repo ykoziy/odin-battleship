@@ -240,4 +240,38 @@ describe('Gameboard', () => {
       });
     });
   });
+
+  describe('removeShip()', () => {
+    let testBoard = Gameboard();
+
+    beforeEach(() => {
+      testBoard = Gameboard();
+    });
+
+    it('should remove the carrier (5 squares) placed horizontally at (2, 1)', () => {
+      testBoard.placeShip(2, 1, 'horizontal', 0);
+      testBoard.removeShip(0);
+      expect(testBoard.board[1][2]).toMatchObject({
+        shipType: undefined,
+        index: undefined,
+      });
+      expect(testBoard.board[1][6]).toMatchObject({
+        shipType: undefined,
+        index: undefined,
+      });
+    });
+
+    test('should remove the carrier (5 squares) placed vertically at (2, 1)', () => {
+      testBoard.placeShip(2, 1, 'vertical', 0);
+      testBoard.removeShip(0);
+      expect(testBoard.board[1][2]).toMatchObject({
+        shipType: undefined,
+        index: undefined,
+      });
+      expect(testBoard.board[5][2]).toMatchObject({
+        shipType: undefined,
+        index: undefined,
+      });
+    });
+  });
 });
