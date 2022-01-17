@@ -184,6 +184,14 @@ const Gameboard = () => {
     }
   }
 
+  function setBoard(newBoard) {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        board[i][j] = newBoard[i][j];
+      }
+    }
+  }
+
   return {
     placeShip,
     board,
@@ -195,6 +203,7 @@ const Gameboard = () => {
     getPossibleAttacks,
     removeShip,
     reset,
+    setBoard,
   };
 };
 
