@@ -140,8 +140,33 @@ const ShipPlacementDom = (
     });
   }
 
+  function deleteDragListeners() {
+    Array(...ships.children).forEach((element) => {
+      element.removeEventListener('dragstart', startDragHandler, false);
+      element.removeEventListener('dragend', endDragHandler, false);
+    });
+    Array(...board.children).forEach((element) => {
+      element.removeEventListener('dragenter', dragEnterHandler, false);
+      element.removeEventListener('dragover', dragOverHandler, false);
+      element.removeEventListener('dragleave', dragLeaveHandler, false);
+      element.removeEventListener('drop', dropHandler, false);
+    });
+  }
+
+  function resetShips() {
+    Array(...ships.children).forEach((element) => {
+      element.setAttribute('draggable', true);
+      element.style.opacity = 1;
+    });
+  }
+
   function reset() {
     gameBoard.reset();
+    placementCount = 5;
+    dragged = null;
+    deleteDragListeners();
+    setDragListeners();
+    resetShips();
     updatePlacementBoard();
   }
 
