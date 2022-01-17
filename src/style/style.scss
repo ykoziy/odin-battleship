@@ -96,6 +96,18 @@ main {
 
 #ship-selection {
   display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  #placement-menu {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    gap: 20px;
+    button {
+      height: 50px;
+    }
+  }
 
   #ships {
     display: flex;

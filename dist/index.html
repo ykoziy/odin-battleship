@@ -13,11 +13,22 @@
 
     <main id ='ship-placement'>
       <div id='ship-selection'>
-        <div id='ships'></div>
+        <div id='ships'>
+          <div id='ship-carrier' data-ship-type='0' draggable="true"></div>
+          <div id='ship-battleship' data-ship-type='1' draggable="true"></div>
+          <div id='ship-cruiser' data-ship-type='2' draggable="true"></div>
+          <div id='ship-submarine' data-ship-type='3' draggable="true"></div>
+          <div id='ship-destroyer' data-ship-type='4' draggable="true"></div>
+        </div>
+        <div id='placement-menu'>
+          <button id="reset-btn">Reset</button>
+          <button id="ready-btn" disabled='true'>Ready</button>
+        </div>
       </div>
       <div id='ship-board-container'>
-        <div class='ship-board'></div>
-      </div>      
+        <div class='ship-board'>
+        </div>
+      </div>     
     </main>
 
     <main id='game'>
