@@ -1,11 +1,29 @@
 import GameboardDOM from './dom/gameboardDom';
+import ShipPlacementDom from './dom/shipPlacementDom';
 import GameDom from './dom/gameDom';
 import Player from './player';
 import Gameboard from './gameboard';
 import Game from './game';
 
-const App = () => {
-  function init() {
+const App = (state, board = null) => {
+  function initPlaceShips() {
+    document.querySelector('#ship-placement').style.display = 'flex';
+    const shipPlacementElement = '#ship-board-container .ship-board';
+    const shipSelectionElement = '#ship-selection';
+    const board = Gameboard();
+
+    const shipPlacementUI = ShipPlacementDom(
+      shipSelectionElement,
+      shipPlacementElement,
+      board,
+    );
+
+    shipPlacementUI.drawShipPlacementBoard();
+    shipPlacementUI.setDragListeners();
+  }
+
+  function initGame() {
+    document.querySelector('#game').style.display = 'flex';
     const playerBoardElement = '#player-board-container .game-board';
     const enemyBoardElement = '#enemy-board-container .game-board';
 
@@ -22,12 +40,7 @@ const App = () => {
 
     mainGameUI.init();
 
-    function populateDummyBoards(boardOne, boardTwo) {
-      boardOne.placeShip(0, 0, 'vertical', 0);
-      boardOne.placeShip(3, 9, 'horizontal', 1);
-      boardOne.placeShip(3, 4, 'vertical', 2);
-      boardOne.placeShip(6, 5, 'horizontal', 3);
-      boardOne.placeShip(8, 0, 'horizontal', 4);
+    function populateDummyBoards(boardTwo) {
       boardTwo.placeShip(0, 0, 'vertical', 0);
       boardTwo.placeShip(3, 9, 'horizontal', 1);
       boardTwo.placeShip(3, 4, 'vertical', 2);
@@ -36,12 +49,23 @@ const App = () => {
     }
 
     const playerOneBoard = Gameboard();
+    playerOneBoard.setBoard(board.board);
     const playerTwoBoard = Gameboard();
-    populateDummyBoards(playerOneBoard, playerTwoBoard);
+    populateDummyBoards(playerTwoBoard);
 
     const game = Game(playerOne, playerOneBoard, playerTwo, playerTwoBoard);
     boardEnemy.addMoveHandler(game.userInput);
     game.start();
+  }
+
+  function init() {
+    if (state == 'START') {
+      console.log('start');
+    } else if (state == 'PLACE') {
+      initPlaceShips();
+    } else if (state == 'RUN') {
+      initGame();
+    }
   }
 
   return { init };
