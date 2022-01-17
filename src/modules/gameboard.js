@@ -163,6 +163,27 @@ const Gameboard = () => {
     });
   }
 
+  function reset() {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        board[i][j] = {
+          shipType: undefined,
+          index: undefined,
+        };
+      }
+    }
+
+    while (missedShots.length > 0) {
+      missedShots.pop();
+    }
+
+    const fleetLength = fleet.length;
+    for (let i = 0; i < fleetLength; i++) {
+      fleet.shift();
+      fleet.unshift(Ship(i + 1));
+    }
+  }
+
   return {
     placeShip,
     board,
@@ -173,6 +194,7 @@ const Gameboard = () => {
     isAlreadyMissed,
     getPossibleAttacks,
     removeShip,
+    reset,
   };
 };
 
