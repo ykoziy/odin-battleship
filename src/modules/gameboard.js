@@ -1,4 +1,5 @@
 import Ship from './ship';
+import * as util from './util';
 
 const Gameboard = () => {
   // keep track of missed attacks
@@ -79,6 +80,20 @@ const Gameboard = () => {
       }
     }
     return true;
+  }
+
+  function placeShipsRandomly() {
+    let shipType = 0;
+    let directions = ['horizontal', 'vertical'];
+    while (shipType < 5) {
+      let isPlaced = false;
+      do {
+        let coord = util.getRandomBoardCoordinates();
+        let randomDir = directions[Math.floor(Math.random() * 2)];
+        isPlaced = placeShip(coord.x, coord.y, randomDir, shipType);
+      } while (!isPlaced);
+      shipType++;
+    }
   }
 
   function removeShip(shipType) {
@@ -206,6 +221,7 @@ const Gameboard = () => {
 
   return {
     placeShip,
+    placeShipsRandomly,
     recieveAttack,
     missedShots,
     isFleetSunk,
