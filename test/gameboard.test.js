@@ -16,7 +16,7 @@ describe('Gameboard', () => {
 
     it('should place the carrier (5 squares) horizontally at (2, 1)', () => {
       testBoard.placeShip(2, 1, 'horizontal', 0);
-      expect(testBoard.board[1][6]).toMatchObject({
+      expect(testBoard.getCell(6, 1)).toMatchObject({
         shipType: 0,
         index: 4,
       });
@@ -24,7 +24,7 @@ describe('Gameboard', () => {
 
     test('should place the carrier (5 squares) vartically at (2, 1)', () => {
       testBoard.placeShip(2, 1, 'vertical', 0);
-      expect(testBoard.board[5][2]).toMatchObject({
+      expect(testBoard.getCell(2, 5)).toMatchObject({
         shipType: 0,
         index: 4,
       });
@@ -40,7 +40,7 @@ describe('Gameboard', () => {
 
     it('should not place the carrier (5 squares) horizontally at (6, 1) because of border collision', () => {
       testBoard.placeShip(6, 1, 'horizontal', 0);
-      expect(testBoard.board[1][6]).toMatchObject({
+      expect(testBoard.getCell(6, 1)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
@@ -48,7 +48,7 @@ describe('Gameboard', () => {
 
     it('should not place the carrier (5 squares) vertically at (6, 1) because of border collision', () => {
       testBoard.placeShip(7, 6, 'vertical', 0);
-      expect(testBoard.board[6][7]).toMatchObject({
+      expect(testBoard.getCell(7, 6)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
@@ -59,7 +59,7 @@ describe('Gameboard', () => {
     it('should not place the destroyer (2 squares) vertically at (2, 1) because of collision with carrier', () => {
       testBoard.placeShip(2, 1, 'horizontal', 0);
       testBoard.placeShip(2, 1, 'vertical', 4);
-      expect(testBoard.board[2][2]).toMatchObject({
+      expect(testBoard.getCell(2, 2)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
@@ -68,7 +68,7 @@ describe('Gameboard', () => {
     test('should not place the destroyer (2 squares) horizontally at (2, 1) because of collision with carrier', () => {
       testBoard.placeShip(2, 1, 'horizontal', 0);
       testBoard.placeShip(2, 1, 'horizontal', 4);
-      expect(testBoard.board[1][2]).toMatchObject({
+      expect(testBoard.getCell(2, 1)).toMatchObject({
         shipType: 0,
         index: 0,
       });
@@ -104,7 +104,7 @@ describe('Gameboard', () => {
     test('should register a hit when hitting (5, 1) to the carrier (5 squares) at (2, 1)', () => {
       testBoard.placeShip(2, 1, 'horizontal', 0);
       testBoard.recieveAttack(5, 1);
-      expect(testBoard.fleet[0].isHit()).toEqual(true);
+      expect(testBoard.getShip(0).isHit()).toEqual(true);
     });
   });
 
@@ -251,11 +251,11 @@ describe('Gameboard', () => {
     it('should remove the carrier (5 squares) placed horizontally at (2, 1)', () => {
       testBoard.placeShip(2, 1, 'horizontal', 0);
       testBoard.removeShip(0);
-      expect(testBoard.board[1][2]).toMatchObject({
+      expect(testBoard.getCell(2, 1)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
-      expect(testBoard.board[1][6]).toMatchObject({
+      expect(testBoard.getCell(6, 1)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
@@ -264,11 +264,11 @@ describe('Gameboard', () => {
     test('should remove the carrier (5 squares) placed vertically at (2, 1)', () => {
       testBoard.placeShip(2, 1, 'vertical', 0);
       testBoard.removeShip(0);
-      expect(testBoard.board[1][2]).toMatchObject({
+      expect(testBoard.getCell(2, 1)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
-      expect(testBoard.board[5][2]).toMatchObject({
+      expect(testBoard.getCell(2, 5)).toMatchObject({
         shipType: undefined,
         index: undefined,
       });
