@@ -192,6 +192,10 @@ const Gameboard = () => {
     }
   }
 
+  function getCell(x, y) {
+    return board[y][x];
+  }
+
   return {
     placeShip,
     board,
@@ -204,6 +208,7 @@ const Gameboard = () => {
     removeShip,
     reset,
     setBoard,
+    getCell,
   };
 };
 
