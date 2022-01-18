@@ -25,7 +25,7 @@ const ShipPlacementDom = (
   function handleShipClick(event) {
     const x = Number(event.target.dataset.x);
     const y = Number(event.target.dataset.y);
-    const shipType = gameBoard.getCell().shipType;
+    const shipType = gameBoard.getCell(x, y).shipType;
     const ship = gameBoard.fleet[shipType];
     const pos = ship.getPosition();
     const shipDirection = ship.getDirection();
