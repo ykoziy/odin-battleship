@@ -28,13 +28,6 @@ class Player {
     return this._playerType === 'ai';
   }
 
-  //belongs here?
-  #getRandomMove() {
-    let y = Math.floor(Math.random() * 10);
-    let x = Math.floor(Math.random() * 10);
-    return { x, y };
-  }
-
   #isCellAlreadyHit(cell, enemyBoard) {
     if (cell.shipType !== undefined) {
       const hitIndex = cell.index;
