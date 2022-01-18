@@ -50,10 +50,10 @@ const GameboardDOM = (boardElementName) => {
   function updateBoard(gameBoard, hidden) {
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
-        const gameCell = gameBoard.board[y][x];
+        const gameCell = gameBoard.getCell(x, y);
         if (gameCell.shipType !== undefined) {
           const ship = gameBoard.fleet[gameCell.shipType];
-          const index = gameBoard.board[y][x].index;
+          const index = gameCell.index;
           if (ship.isPositionHit(index)) {
             setCell(x, y, 'hit');
           } else if (!ship.isPositionHit(index) && !hidden) {

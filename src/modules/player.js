@@ -63,7 +63,7 @@ class Player {
         this._isPreviousHit = false;
         this.#cpuAttack(enemyBoard);
       } else {
-        const cell = enemyBoard.board[cpuMove.y][cpuMove.x];
+        const cell = enemyBoard.getCell(cpuMove.x, cpuMove.y);
         enemyBoard.recieveAttack(cpuMove.x, cpuMove.y);
         if (this.#isCellAlreadyHit(cell, enemyBoard)) {
           this._nextAttack = this.#advancedAiAttack(
@@ -78,7 +78,7 @@ class Player {
       //previous move was not a hit, try random cell
       const cpuMove = this.#getRandomMove();
       const isMissed = enemyBoard.isAlreadyMissed(cpuMove.x, cpuMove.y);
-      const cell = enemyBoard.board[cpuMove.y][cpuMove.x];
+      const cell = enemyBoard.getCell(cpuMove.x, cpuMove.y);
 
       if (isMissed || this.#isCellAlreadyHit(cell, enemyBoard)) {
         this.#cpuAttack(enemyBoard);
