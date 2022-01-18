@@ -49,7 +49,7 @@ const App = (state, board = null) => {
     }
 
     const playerOneBoard = Gameboard();
-    playerOneBoard.setBoard(board.board);
+    playerOneBoard.setBoard(board.getBoard());
     const playerTwoBoard = Gameboard();
     populateDummyBoards(playerTwoBoard);
 
