@@ -192,6 +192,10 @@ const Gameboard = () => {
     }
   }
 
+  function getBoard() {
+    return board;
+  }
+
   function getCell(x, y) {
     return board[y][x];
   }
@@ -202,16 +206,15 @@ const Gameboard = () => {
 
   return {
     placeShip,
-    board,
     recieveAttack,
     missedShots,
-    fleet,
     isFleetSunk,
     isAlreadyMissed,
     getPossibleAttacks,
     removeShip,
     reset,
     setBoard,
+    getBoard,
     getCell,
     getShip,
   };
