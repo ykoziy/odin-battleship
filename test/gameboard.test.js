@@ -4,7 +4,9 @@ import Gameboard from '../src/modules/gameboard';
 describe('Gameboard', () => {
   test('Creating a gameboard, returns 2D array 10x10. 100 squares', () => {
     const gameboard = Gameboard();
-    expect(gameboard.board.length * gameboard.board[0].length).toEqual(100);
+    expect(
+      gameboard.getBoard().length * gameboard.getBoard()[1].length,
+    ).toEqual(100);
   });
 
   describe('placeShip() on empty board without collisions', () => {
