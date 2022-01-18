@@ -36,7 +36,7 @@ class Player {
   #isCellAlreadyHit(cell, enemyBoard) {
     if (cell.shipType !== undefined) {
       const hitIndex = cell.index;
-      const ship = enemyBoard.fleet[cell.shipType];
+      const ship = enemyBoard.getShip(cell.shipType);
       return ship.isPositionHit(hitIndex) === true;
     }
     return false;

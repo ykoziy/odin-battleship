@@ -52,7 +52,7 @@ const GameboardDOM = (boardElementName) => {
       for (let x = 0; x < 10; x++) {
         const gameCell = gameBoard.getCell(x, y);
         if (gameCell.shipType !== undefined) {
-          const ship = gameBoard.fleet[gameCell.shipType];
+          const ship = gameBoard.getShip(gameCell.shipType);
           const index = gameCell.index;
           if (ship.isPositionHit(index)) {
             setCell(x, y, 'hit');
