@@ -1,3 +1,5 @@
+import * as util from './util';
+
 class Player {
   constructor(playerName, playerType = '') {
     this._playerName = playerName;
@@ -76,7 +78,7 @@ class Player {
       }
     } else {
       //previous move was not a hit, try random cell
-      const cpuMove = this.#getRandomMove();
+      const cpuMove = util.getRandomBoardCoordinates();
       const isMissed = enemyBoard.isAlreadyMissed(cpuMove.x, cpuMove.y);
       const cell = enemyBoard.getCell(cpuMove.x, cpuMove.y);
 
