@@ -120,7 +120,6 @@ const ShipPlacementDom = (
         placementCount--;
         dragged = undefined;
       }
-      console.log(placementCount);
       if (placementCount === 0) {
         placementMenu.querySelector('#ready-btn').removeAttribute('disabled');
       }
