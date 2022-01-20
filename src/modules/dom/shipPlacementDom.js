@@ -1,18 +1,25 @@
-import App from '../app';
+import Gameboard from '../gameboard';
 
-const ShipPlacementDom = (
-  shipsElementName,
-  boardElementName,
-  gameBoard,
-  doneCallback,
-) => {
-  const board = document.querySelector(boardElementName);
-  const ships = document.querySelector(`${shipsElementName} #ships`);
+const ShipPlacementDom = (placementElement, setAppStateCallback) => {
+  const thisElement = document.querySelector(placementElement);
+  const board = document.querySelector(`${placementElement} .ship-board`);
+  const ships = document.querySelector(`${placementElement} #ships`);
+  const battleshipBoard = Gameboard();
+
   const placementMenu = document.querySelector(
-    `${shipsElementName} #placement-menu`,
+    `${placementElement} #placement-menu`,
   );
+
   let placementCount = 5;
   let dragged;
+
+  function show() {
+    thisElement.style.display = 'flex';
+    drawShipPlacementBoard();
+    setDragListeners();
+    placementMenu.querySelector('#reset-btn').addEventListener('click', reset);
+    placementMenu.querySelector('#ready-btn').addEventListener('click', ready);
+  }
 
   function drawCell(x, y) {
     let cell = document.createElement('div');
@@ -25,19 +32,29 @@ const ShipPlacementDom = (
   function handleShipClick(event) {
     const x = Number(event.target.dataset.x);
     const y = Number(event.target.dataset.y);
-    const shipType = gameBoard.getCell(x, y).shipType;
-    const ship = gameBoard.getShip(shipType);
+    const shipType = battleshipBoard.getCell(x, y).shipType;
+    const ship = battleshipBoard.getShip(shipType);
     const pos = ship.getPosition();
     const shipDirection = ship.getDirection();
     let isPlaced = false;
-    gameBoard.removeShip(shipType);
+    battleshipBoard.removeShip(shipType);
     if (shipDirection === 'horizontal') {
-      isPlaced = gameBoard.placeShip(pos[0], pos[1], 'vertical', shipType);
+      isPlaced = battleshipBoard.placeShip(
+        pos[0],
+        pos[1],
+        'vertical',
+        shipType,
+      );
     } else {
-      isPlaced = gameBoard.placeShip(pos[0], pos[1], 'horizontal', shipType);
+      isPlaced = battleshipBoard.placeShip(
+        pos[0],
+        pos[1],
+        'horizontal',
+        shipType,
+      );
     }
     if (!isPlaced) {
-      gameBoard.placeShip(pos[0], pos[1], shipDirection, shipType);
+      battleshipBoard.placeShip(pos[0], pos[1], shipDirection, shipType);
     }
     updatePlacementBoard();
   }
@@ -66,7 +83,7 @@ const ShipPlacementDom = (
   function updatePlacementBoard() {
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
-        const gameCell = gameBoard.getCell(x, y);
+        const gameCell = battleshipBoard.getCell(x, y);
         if (gameCell.shipType !== undefined) {
           setCell(x, y, 'ship');
         } else {
@@ -112,7 +129,12 @@ const ShipPlacementDom = (
       const x = Number(event.target.dataset.x);
       const y = Number(event.target.dataset.y);
       const shipType = Number(dragged.dataset.shipType);
-      const isShipPlaced = gameBoard.placeShip(x, y, 'horizontal', shipType);
+      const isShipPlaced = battleshipBoard.placeShip(
+        x,
+        y,
+        'horizontal',
+        shipType,
+      );
       if (isShipPlaced) {
         dragged.setAttribute('draggable', false);
         dragged.removeEventListener('dragstart', startDragHandler, false);
@@ -160,7 +182,7 @@ const ShipPlacementDom = (
   }
 
   function reset() {
-    gameBoard.reset();
+    battleshipBoard.reset();
     placementCount = 5;
     dragged = null;
     deleteDragListeners();
@@ -170,17 +192,11 @@ const ShipPlacementDom = (
   }
 
   function ready() {
-    console.log('ready');
-    const app = App('RUN', gameBoard);
-    app.init();
-    document.querySelector('#ship-placement').style.display = 'none';
+    thisElement.style.display = 'none';
+    setAppStateCallback(battleshipBoard);
   }
 
-  placementMenu.querySelector('#reset-btn').addEventListener('click', reset);
-
-  placementMenu.querySelector('#ready-btn').addEventListener('click', ready);
-
-  return { drawShipPlacementBoard, setDragListeners };
+  return { show };
 };
 
 export default ShipPlacementDom;
