@@ -33,7 +33,7 @@ const App = (state) => {
     const boardEnemy = GameboardDOM(enemyBoardElement);
     boardEnemy.drawEmptyBoard();
 
-    const playerOne = new Player('Alice', '');
+    const playerOne = new Player(playerName, '');
     const playerTwo = new Player('Bob', 'ai');
 
     const mainGameUI = GameDom('#game', playerOne, playerTwo);
