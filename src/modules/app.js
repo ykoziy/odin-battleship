@@ -10,6 +10,12 @@ const App = (state) => {
   let appState = state;
   let board, playerName;
 
+  function initGameStart() {
+    const gameStartElement = '#game-start';
+    const startUI = Start(gameStartElement, placementMenu);
+    startUI.show();
+  }
+
   function initPlaceShips() {
     const placementElement = '#ship-placement';
     const shipPlacementUI = ShipPlacementDom(placementElement, runGame);
@@ -56,6 +62,13 @@ const App = (state) => {
     board = gameBoard;
     appState = 'RUN';
     initGame();
+  }
+
+  function placementMenu(name) {
+    console.log('placing');
+    playerName = name;
+    appState = 'PLACE';
+    init();
   }
 
   function init() {
