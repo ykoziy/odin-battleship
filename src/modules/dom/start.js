@@ -28,8 +28,10 @@ const Start = (startMenuElement, setAppStateCallback) => {
   }
 
   function startGame(playerName) {
-    startEntry.style.display = 'none';
-    setAppStateCallback(playerName);
+    startMenu.style.display = 'none';
+    if (typeof setAppStateCallback === 'function') {
+      setAppStateCallback(playerName);
+    }
   }
 
   function handleStartClick() {

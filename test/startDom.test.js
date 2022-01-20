@@ -50,7 +50,7 @@ describe('Start UI testing', () => {
     const continueBtn = document.querySelector('#continue-btn');
     const startBtn = document.querySelector('#start-btn');
 
-    const validateElement = document.querySelector('#player-name-entry');
+    const validateElement = document.querySelector('#game-start');
 
     let evt = new Event('click');
 
@@ -65,7 +65,7 @@ describe('Start UI testing', () => {
     const continueBtn = document.querySelector('#continue-btn');
     const startBtn = document.querySelector('#start-btn');
 
-    const validateElement = document.querySelector('#player-name-entry');
+    const validateElement = document.querySelector('#game-start');
 
     let evt = new Event('click');
 
