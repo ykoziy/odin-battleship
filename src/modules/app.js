@@ -1,25 +1,19 @@
 import GameboardDOM from './dom/gameboardDom';
 import ShipPlacementDom from './dom/shipPlacementDom';
+import Start from './dom/start';
 import GameDom from './dom/gameDom';
 import Player from './player';
 import Gameboard from './gameboard';
 import Game from './game';
 
-const App = (state, board = null) => {
+const App = (state) => {
+  let appState = state;
+  let board, playerName;
+
   function initPlaceShips() {
-    document.querySelector('#ship-placement').style.display = 'flex';
-    const shipPlacementElement = '#ship-board-container .ship-board';
-    const shipSelectionElement = '#ship-selection';
-    const board = Gameboard();
-
-    const shipPlacementUI = ShipPlacementDom(
-      shipSelectionElement,
-      shipPlacementElement,
-      board,
-    );
-
-    shipPlacementUI.drawShipPlacementBoard();
-    shipPlacementUI.setDragListeners();
+    const placementElement = '#ship-placement';
+    const shipPlacementUI = ShipPlacementDom(placementElement, runGame);
+    shipPlacementUI.show();
   }
 
   function initGame() {
@@ -58,12 +52,18 @@ const App = (state, board = null) => {
     game.start();
   }
 
+  function runGame(gameBoard) {
+    board = gameBoard;
+    appState = 'RUN';
+    initGame();
+  }
+
   function init() {
-    if (state == 'START') {
-      console.log('start');
-    } else if (state == 'PLACE') {
+    if (appState == 'START') {
+      initGameStart();
+    } else if (appState == 'PLACE') {
       initPlaceShips();
-    } else if (state == 'RUN') {
+    } else if (appState == 'RUN') {
       initGame();
     }
   }
