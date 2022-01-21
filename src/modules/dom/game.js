@@ -1,4 +1,4 @@
-const GameDom = (gameElementName, playerOne, playerTwo) => {
+const Game = (gameElementName, playerOne, playerTwo) => {
   const gameBoard = document.querySelector(gameElementName);
 
   function init() {
@@ -12,4 +12,4 @@ const GameDom = (gameElementName, playerOne, playerTwo) => {
   return { init };
 };
 
-export default GameDom;
+export default Game;
