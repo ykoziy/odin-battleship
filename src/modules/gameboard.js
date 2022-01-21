@@ -22,12 +22,13 @@ const Gameboard = () => {
     return boardArray;
   }
 
-  function isColliding(x, y, direction, shipLength) {
+  function isNotColliding(x, y, direction, shipLength) {
+    //check along the entire length, not just
     if (direction === 'horizontal') {
       for (let i = 0; i < shipLength; i++) {
         if (typeof board[y][x + i] !== 'undefined') {
           if (board[y][x + i].shipType !== undefined) {
-            return true;
+            return false;
           }
         }
       }
@@ -35,12 +36,12 @@ const Gameboard = () => {
       for (let i = 0; i < shipLength; i++) {
         if (typeof board[y + i][x] !== 'undefined') {
           if (board[y + i][x].shipType !== undefined) {
-            return true;
+            return false;
           }
         }
       }
     }
-    return false;
+    return true;
   }
 
   function isWithinBounds(x, y, direction, shipLength) {
@@ -54,7 +55,7 @@ const Gameboard = () => {
   function isMoveValid(x, y, direction, shipLength) {
     return (
       isWithinBounds(x, y, direction, shipLength) &&
-      !isColliding(x, y, direction, shipLength)
+      isNotColliding(x, y, direction, shipLength)
     );
   }
 
