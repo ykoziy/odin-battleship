@@ -1,1 +1,1 @@
-# The Odin Project: Weather App
+# The Odin Project: Battleship Game
