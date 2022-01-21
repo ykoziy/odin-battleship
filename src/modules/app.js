@@ -1,5 +1,5 @@
 import GameboardDOM from './dom/gameboard';
-import ShipPlacementDom from './dom/shipPlacement';
+import { default as ShipPlacementDom } from './dom/shipPlacement';
 import Start from './dom/start';
 import { default as GameDom } from './dom/game';
 import Player from './player';

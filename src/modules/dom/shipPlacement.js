@@ -1,6 +1,6 @@
 import Gameboard from '../gameboard';
 
-const ShipPlacementDom = (placementElement, setAppStateCallback) => {
+const ShipPlacement = (placementElement, setAppStateCallback) => {
   const thisElement = document.querySelector(placementElement);
   const board = document.querySelector(`${placementElement} .ship-board`);
   const ships = document.querySelector(`${placementElement} #ships`);
