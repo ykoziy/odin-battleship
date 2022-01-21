@@ -1,4 +1,4 @@
-const GameboardDOM = (boardElementName) => {
+const Gameboard = (boardElementName) => {
   const gameBoard = document.querySelector(boardElementName);
 
   function addMoveHandler(handleMove) {
@@ -72,4 +72,4 @@ const GameboardDOM = (boardElementName) => {
   return { drawEmptyBoard, updateBoard, addMoveHandler, removeAllMoveHandlers };
 };
 
-export default GameboardDOM;
+export default Gameboard;

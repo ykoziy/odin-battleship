@@ -199,4 +199,4 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
   return { show };
 };
 
-export default ShipPlacementDom;
+export default ShipPlacement;

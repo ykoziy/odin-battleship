@@ -1,4 +1,4 @@
-import GameboardDOM from './dom/gameboard';
+import { default as GameboardDOM } from './dom/gameboard';
 import { default as ShipPlacementDom } from './dom/shipPlacement';
 import Start from './dom/start';
 import { default as GameDom } from './dom/game';
