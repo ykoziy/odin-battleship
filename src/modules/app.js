@@ -1,4 +1,4 @@
-import GameboardDOM from './dom/gameboardDom';
+import GameboardDOM from './dom/gameboard';
 import ShipPlacementDom from './dom/shipPlacementDom';
 import Start from './dom/start';
 import GameDom from './dom/game';

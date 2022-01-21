@@ -1,4 +1,4 @@
-import GameboardDOM from './dom/gameboardDom';
+import GameboardDOM from './dom/gameboard';
 
 const Game = (playerOne, playerOneBoard, playerTwo, playerTwoBoard) => {
   const playerBoardElement = '#player-board-container .game-board';
