@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+$bg-color: seagreen;
+$ship-color: #879496;
+
 html {
   font-size: 62.5%;
 }
@@ -17,7 +20,7 @@ h2 {
 }
 
 body {
-  background-color: seagreen;
+  background-color: $bg-color;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -26,9 +29,27 @@ body {
   align-items: center;
 }
 
+header {
+  margin-bottom: 65px;
+}
+
 main {
   display: flex;
   gap: 150px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  font-size: 1.8rem;
+}
+
+footer a:hover {
+  img {
+    transform: scale(1.1);
+  }
 }
 
 #game {
@@ -40,8 +61,42 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 780px;
-  height: 500px;
+  width: 750px;
+  height: 430px;
+
+  button {
+    height: 50px;
+    width: 150px;
+  }
+}
+
+#main-menu {
+  display: flex;
+  background-color: lightseagreen;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#player-name-entry {
+  display: none;
+  background-color: lightseagreen;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 25px;
+
+  input {
+    padding: 10px;
+  }
+}
+
+.visible {
+  display: flex;
 }
 
 #ship-placement {
@@ -60,6 +115,8 @@ main {
 
 .game-board,
 .ship-board {
+  $cell-height: 40px;
+  $cell-width: $cell-height;
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   background-color: black;
@@ -67,8 +124,8 @@ main {
   padding: 2px;
 
   .board-cell {
-    width: 40px;
-    height: 40px;
+    width: $cell-height;
+    height: $cell-width;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,21 +137,36 @@ main {
   }
 
   .hit {
-    background-color: red;
-    border-radius: 50%;
-    width: 30%;
-    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $ship-color;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hit::after {
+    content: '\D7';
+    font-size: $cell-height * 1.6;
+    font-weight: bold;
+    color: red;
   }
 
   .miss {
-    background-color: black;
-    border-radius: 50%;
-    width: 30%;
-    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .miss::after {
+    content: '\D7';
+    font-size: $cell-height * 1.6;
+    font-weight: bold;
+    color: black;
   }
 
   .ship {
-    background-color: lightgrey;
+    background-color: $ship-color;
     width: 100%;
     height: 100%;
   }
@@ -103,15 +175,14 @@ main {
 #ship-selection {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 15px;
 
   #placement-menu {
     display: flex;
-    flex-direction: column;
     width: 150px;
-    gap: 20px;
+    gap: 15px;
     button {
-      height: 50px;
+      height: 45px;
     }
   }
 
@@ -121,7 +192,7 @@ main {
     gap: 10px;
 
     #ship-carrier {
-      background-color: rgb(127, 125, 241);
+      background-color: $ship-color;
       border: 2px solid black;
       height: 40px;
       width: 40px * 5;
@@ -129,7 +200,7 @@ main {
     }
 
     #ship-battleship {
-      background-color: rgb(127, 125, 241);
+      background-color: $ship-color;
       border: 2px solid black;
       height: 40px;
       width: 40px * 4;
@@ -137,7 +208,7 @@ main {
     }
 
     #ship-cruiser {
-      background-color: rgb(127, 125, 241);
+      background-color: $ship-color;
       border: 2px solid black;
       height: 40px;
       width: 40px * 3;
@@ -145,7 +216,7 @@ main {
     }
 
     #ship-submarine {
-      background-color: rgb(127, 125, 241);
+      background-color: $ship-color;
       border: 2px solid black;
       height: 40px;
       width: 40px * 3;
@@ -153,49 +224,11 @@ main {
     }
 
     #ship-destroyer {
-      background-color: rgb(127, 125, 241);
+      background-color: $ship-color;
       border: 2px solid black;
       height: 40px;
       width: 40px * 2;
       cursor: move;
     }
   }
-}
-
-#main-menu {
-  display: flex;
-  background-color: lightseagreen;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  button {
-    height: 50px;
-    width: 150px;
-  }
-}
-
-#player-name-entry {
-  display: none;
-  background-color: lightseagreen;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  gap: 25px;
-
-  button {
-    height: 50px;
-    width: 150px;
-  }
-
-  input {
-    padding: 10px;
-  }
-}
-
-.visible {
-  display: flex;
 }
