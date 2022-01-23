@@ -51,7 +51,8 @@ const App = (state) => {
     const playerOneBoard = Gameboard();
     playerOneBoard.setBoard(board.getBoard());
     const playerTwoBoard = Gameboard();
-    populateDummyBoards(playerTwoBoard);
+    //populateDummyBoards(playerTwoBoard);
+    playerTwoBoard.placeShipsRandomly();
 
     const game = Game(playerOne, playerOneBoard, playerTwo, playerTwoBoard);
     boardEnemy.addMoveHandler(game.userInput);
