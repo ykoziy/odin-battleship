@@ -69,7 +69,22 @@ const Gameboard = (boardElementName) => {
     }
   }
 
-  return { drawEmptyBoard, updateBoard, addMoveHandler, removeAllMoveHandlers };
+  function reset() {
+    const cells = gameBoard.querySelectorAll('.board-cell');
+
+    cells.forEach((element) => {
+      console.log(element.innerHTML);
+      element.innerHTML = '';
+    });
+  }
+
+  return {
+    drawEmptyBoard,
+    updateBoard,
+    addMoveHandler,
+    removeAllMoveHandlers,
+    reset,
+  };
 };
 
 export default Gameboard;
