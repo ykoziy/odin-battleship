@@ -27,11 +27,8 @@ const App = (state) => {
     const playerBoardElement = '#player-board-container .game-board';
     const enemyBoardElement = '#enemy-board-container .game-board';
 
-    const boardPlayer = GameboardDOM(playerBoardElement);
-    boardPlayer.drawEmptyBoard();
-
-    const boardEnemy = GameboardDOM(enemyBoardElement);
-    boardEnemy.drawEmptyBoard();
+    const playerBoardUI = GameboardDOM(playerBoardElement);
+    const enemyBoardUI = GameboardDOM(enemyBoardElement);
 
     const playerOne = new Player(playerName, '');
     const playerTwo = new Player('Bob', 'ai');
@@ -54,6 +51,17 @@ const App = (state) => {
     //populateDummyBoards(playerTwoBoard);
     playerTwoBoard.placeShipsRandomly();
 
+    if (
+      !document.querySelector(`${playerBoardElement} .board-cell`) &&
+      !document.querySelector(`${enemyBoardElement} .board-cell`)
+    ) {
+      playerBoardUI.drawEmptyBoard();
+      enemyBoardUI.drawEmptyBoard();
+    } else {
+      playerBoardUI.reset();
+      enemyBoardUI.reset();
+    }
+
     const game = Game(
       playerOne,
       playerOneBoard,
@@ -61,7 +69,7 @@ const App = (state) => {
       playerTwoBoard,
       mainGameUI.displayWinner,
     );
-    boardEnemy.addMoveHandler(game.userInput);
+    enemyBoardUI.addMoveHandler(game.userInput);
     game.start();
   }
 
