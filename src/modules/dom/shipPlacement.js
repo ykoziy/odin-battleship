@@ -15,6 +15,10 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
 
   function show() {
     thisElement.style.display = 'flex';
+    if (board.querySelector('.board-cell')) {
+      reset();
+      return;
+    }
     drawShipPlacementBoard();
     setDragListeners();
     placementMenu.querySelector('#reset-btn').addEventListener('click', reset);
