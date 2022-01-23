@@ -55,7 +55,8 @@ const Gameboard = () => {
   function isMoveValid(x, y, direction, shipLength) {
     return (
       isWithinBounds(x, y, direction, shipLength) &&
-      isNotColliding(x, y, direction, shipLength)
+      isNotColliding(x, y, direction, shipLength) &&
+      isPlacable(x, y, direction, shipLength)
     );
   }
 
@@ -78,6 +79,96 @@ const Gameboard = () => {
       for (let i = 0; i < shipLength; i++) {
         board[y + i][x].shipType = shipType;
         board[y + i][x].index = i;
+      }
+    }
+    return true;
+  }
+
+  function isPlacable(x, y, direction, shipLength) {
+    if (direction === 'horizontal') {
+      //check top and bottom
+      for (let i = 0; i < shipLength; i++) {
+        if (y - 1 >= 0) {
+          if (board[y - 1] && board[y - 1][x + i].shipType !== undefined) {
+            return false;
+          }
+        }
+        if (y + 1 < 10) {
+          if (board[y + 1] && board[y + 1][x + i].shipType !== undefined) {
+            return false;
+          }
+        }
+      }
+
+      //check left
+      let cells = [
+        board[y][x - 1],
+        board[y - 1] && board[y - 1][x - 1],
+        board[y + 1] && board[y + 1][x - 1],
+      ];
+      for (let i = 0; i < cells.length; i++) {
+        if (typeof cells[i] !== 'undefined') {
+          if (cells[i].shipType !== undefined) {
+            return false;
+          }
+        }
+      }
+
+      //check right
+      cells = [
+        board[y][x + shipLength],
+        board[y - 1] && board[y - 1][x + shipLength],
+        board[y + 1] && board[y + 1][x + shipLength],
+      ];
+
+      for (let i = 0; i < cells.length; i++) {
+        if (typeof cells[i] !== 'undefined') {
+          if (cells[i].shipType !== undefined) {
+            return false;
+          }
+        }
+      }
+    } else if (direction === 'vertical') {
+      //check left and right
+      for (let i = 0; i < shipLength; i++) {
+        if (x - 1 >= 0) {
+          if (board[y + i] && board[y + i][x - 1].shipType !== undefined) {
+            return false;
+          }
+        }
+        if (x + 1 < 10) {
+          if (board[y + i] && board[y + i][x + 1].shipType !== undefined) {
+            return false;
+          }
+        }
+      }
+
+      //check top
+      let cells = [
+        board[y - 1] && board[y - 1][x],
+        board[y - 1] && board[y - 1][x - 1],
+        board[y - 1] && board[y - 1][x + 1],
+      ];
+      for (let i = 0; i < cells.length; i++) {
+        if (typeof cells[i] !== 'undefined') {
+          if (cells[i].shipType !== undefined) {
+            return false;
+          }
+        }
+      }
+
+      //check bottom
+      cells = [
+        board[y + shipLength] && board[y + shipLength][x],
+        board[y + shipLength] && board[y + shipLength][x - 1],
+        board[y + shipLength] && board[y + shipLength][x + 1],
+      ];
+      for (let i = 0; i < cells.length; i++) {
+        if (typeof cells[i] !== 'undefined') {
+          if (cells[i].shipType !== undefined) {
+            return false;
+          }
+        }
       }
     }
     return true;
