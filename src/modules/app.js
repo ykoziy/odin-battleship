@@ -36,7 +36,7 @@ const App = (state) => {
     const playerOne = new Player(playerName, '');
     const playerTwo = new Player('Bob', 'ai');
 
-    const mainGameUI = GameDom('#game', playerOne, playerTwo);
+    const mainGameUI = GameDom('#game', playerOne, playerTwo, startGame);
 
     mainGameUI.init();
 
@@ -54,9 +54,21 @@ const App = (state) => {
     //populateDummyBoards(playerTwoBoard);
     playerTwoBoard.placeShipsRandomly();
 
-    const game = Game(playerOne, playerOneBoard, playerTwo, playerTwoBoard);
+    const game = Game(
+      playerOne,
+      playerOneBoard,
+      playerTwo,
+      playerTwoBoard,
+      mainGameUI.displayWinner,
+    );
     boardEnemy.addMoveHandler(game.userInput);
     game.start();
+  }
+
+  function startGame() {
+    document.querySelector('#game').style.display = 'none';
+    appState = 'START';
+    init();
   }
 
   function runGame(gameBoard) {

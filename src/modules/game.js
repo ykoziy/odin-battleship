@@ -1,6 +1,12 @@
 import { default as GameboardDOM } from './dom/gameboard';
 
-const Game = (playerOne, playerOneBoard, playerTwo, playerTwoBoard) => {
+const Game = (
+  playerOne,
+  playerOneBoard,
+  playerTwo,
+  playerTwoBoard,
+  displayWinnerCallback,
+) => {
   const playerBoardElement = '#player-board-container .game-board';
   const enemyBoardElement = '#enemy-board-container .game-board';
 
@@ -33,13 +39,13 @@ const Game = (playerOne, playerOneBoard, playerTwo, playerTwoBoard) => {
 
   function end() {
     playerOneTurn = undefined;
-    console.log(`Winner is ${getWinner()}`);
+    displayWinnerCallback(getWinner());
     enemyBoardUI.removeAllMoveHandlers(userInput);
   }
 
   function update() {
     playerBoardUI.updateBoard(playerOneBoard);
-    enemyBoardUI.updateBoard(playerTwoBoard, true);
+    enemyBoardUI.updateBoard(playerTwoBoard, false);
   }
 
   function nextTurn() {
@@ -78,7 +84,7 @@ const Game = (playerOne, playerOneBoard, playerTwo, playerTwoBoard) => {
     }
   }
 
-  return { getWinner, start, userInput };
+  return { start, userInput };
 };
 
 export default Game;
