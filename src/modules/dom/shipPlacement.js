@@ -19,6 +19,9 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
     setDragListeners();
     placementMenu.querySelector('#reset-btn').addEventListener('click', reset);
     placementMenu.querySelector('#ready-btn').addEventListener('click', ready);
+    placementMenu
+      .querySelector('#random-btn')
+      .addEventListener('click', randomPlacement);
   }
 
   function drawCell(x, y) {
@@ -194,6 +197,13 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
   function ready() {
     thisElement.style.display = 'none';
     setAppStateCallback(battleshipBoard);
+  }
+
+  function randomPlacement() {
+    battleshipBoard.reset();
+    resetShips();
+    battleshipBoard.placeShipsRandomly();
+    updatePlacementBoard();
   }
 
   return { show };
