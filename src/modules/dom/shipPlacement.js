@@ -200,10 +200,12 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
   }
 
   function randomPlacement() {
+    deleteDragListeners();
     battleshipBoard.reset();
     resetShips();
     battleshipBoard.placeShipsRandomly();
     updatePlacementBoard();
+    placementMenu.querySelector('#ready-btn').removeAttribute('disabled');
   }
 
   return { show };
