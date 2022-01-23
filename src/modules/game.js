@@ -39,7 +39,7 @@ const Game = (playerOne, playerOneBoard, playerTwo, playerTwoBoard) => {
 
   function update() {
     playerBoardUI.updateBoard(playerOneBoard);
-    enemyBoardUI.updateBoard(playerTwoBoard);
+    enemyBoardUI.updateBoard(playerTwoBoard, true);
   }
 
   function nextTurn() {
