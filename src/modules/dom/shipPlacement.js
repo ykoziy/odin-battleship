@@ -189,6 +189,7 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
   }
 
   function reset() {
+    placementMenu.querySelector('#ready-btn').setAttribute('disabled', false);
     battleshipBoard.reset();
     placementCount = 5;
     dragged = null;
