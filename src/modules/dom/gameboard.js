@@ -71,9 +71,7 @@ const Gameboard = (boardElementName) => {
 
   function reset() {
     const cells = gameBoard.querySelectorAll('.board-cell');
-
     cells.forEach((element) => {
-      console.log(element.innerHTML);
       element.innerHTML = '';
     });
   }
