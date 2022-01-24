@@ -1,7 +1,40 @@
+@mixin respond($breakpoint) {
+  //screen less than 640px;
+  @if $breakpoint==mobile {
+    @media only screen and (max-width: 640px) {
+      @content;
+    }
+  }
+
+  //screen between 641px and 1007px;
+  @if $breakpoint==tablet {
+    @media only screen and (min-width: 641px) and (max-width: 1007px) {
+      @content;
+    }
+  }
+
+  //screen bigger than 1008px;
+  @if $breakpoint==laptop {
+    @media only screen and (min-width: 1008px) {
+      @content;
+    }
+  }
+}
+
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+:root {
+  --cell-height: 40px;
+
+  @include respond(mobile) {
+    --cell-height: 30px;
+  }
+
+  --cell-width: var(--cell-height);
 }
 
 $bg-color: seagreen;
@@ -23,6 +56,9 @@ body {
   background-color: $bg-color;
   width: 100vw;
   height: 100vh;
+  @include respond(mobile) {
+    height: fit-content;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,11 +67,20 @@ body {
 
 header {
   margin-bottom: 65px;
+  img {
+    @include respond(mobile) {
+      height: auto;
+      width: 420px;
+    }
+  }
 }
 
 main {
   display: flex;
   gap: 150px;
+  @include respond(mobile) {
+    gap: 50px;
+  }
 }
 
 footer {
@@ -54,6 +99,9 @@ footer a:hover {
 
 #game {
   display: none;
+  @include respond(mobile) {
+    flex-direction: column;
+  }
 }
 
 #game-over {
@@ -90,6 +138,11 @@ footer a:hover {
   justify-content: center;
   width: 750px;
   height: 430px;
+  @include respond(mobile) {
+    width: 100vw;
+    padding: 0 25px 0 25px;
+    height: 330px;
+  }
 
   button {
     height: 50px;
@@ -128,6 +181,10 @@ footer a:hover {
 
 #ship-placement {
   display: none;
+  @include respond(mobile) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 #player-board-container,
@@ -142,8 +199,6 @@ footer a:hover {
 
 .game-board,
 .ship-board {
-  $cell-height: 40px;
-  $cell-width: $cell-height;
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   background-color: black;
@@ -151,8 +206,8 @@ footer a:hover {
   padding: 2px;
 
   .board-cell {
-    width: $cell-height;
-    height: $cell-width;
+    width: var(--cell-width);
+    height: var(--cell-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,7 +229,7 @@ footer a:hover {
 
   .hit::after {
     content: '\D7';
-    font-size: $cell-height * 1.6;
+    font-size: calc(var(--cell-height) * 1.6);
     font-weight: bold;
     color: red;
   }
@@ -187,7 +242,7 @@ footer a:hover {
 
   .miss::after {
     content: '\D7';
-    font-size: $cell-height * 1.6;
+    font-size: calc(var(--cell-height) * 1.6);
     font-weight: bold;
     color: black;
   }
