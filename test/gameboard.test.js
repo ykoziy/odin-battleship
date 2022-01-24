@@ -313,4 +313,24 @@ describe('Gameboard', () => {
 
     expect(boardB.getBoard()).toStrictEqual(boardA.getBoard());
   });
+
+  test('placeShipsRandomly(), should place ships randomly on the board', () => {
+    let testBoard = Gameboard();
+    testBoard.placeShipsRandomly();
+
+    function areShipsPlaced(board) {
+      const set = new Set();
+      for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board.length; j++) {
+          let cell = board[i][j];
+          if (cell.shipType !== undefined) {
+            set.add(cell.shipType);
+          }
+        }
+      }
+      return set.size === 5;
+    }
+
+    expect(areShipsPlaced(testBoard.getBoard())).toBe(true);
+  });
 });
