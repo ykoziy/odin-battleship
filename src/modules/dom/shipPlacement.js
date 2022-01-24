@@ -109,7 +109,11 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
   }
 
   function endDragHandler(event) {
-    //event.target.style.opacity = 1;
+    console.log(event);
+    if (event.dataTransfer.dropEffect == 'none') {
+      event.target.style.opacity = 1;
+      dragged = null;
+    }
   }
 
   function dragOverHandler(event) {
@@ -147,7 +151,10 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
         dragged.removeEventListener('dragstart', startDragHandler, false);
         updatePlacementBoard();
         placementCount--;
+        dragged.style.opacity = 0.5;
         dragged = undefined;
+      } else {
+        dragged.style.opacity = 1;
       }
       if (placementCount === 0) {
         placementMenu.querySelector('#ready-btn').removeAttribute('disabled');
