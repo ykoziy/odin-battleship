@@ -301,4 +301,16 @@ describe('Gameboard', () => {
     expect(testBoard.missedShots).toStrictEqual([]);
     expect(testBoard.getShip(0).isHit()).toBe(false);
   });
+
+  test('setBoard(), should copy the board', () => {
+    let boardA = Gameboard();
+    boardA.placeShip(0, 0, 'vertical', 0);
+    boardA.recieveAttack(0, 0);
+    boardA.recieveAttack(1, 0);
+    let boardB = Gameboard();
+
+    boardB.setBoard(boardA.getBoard());
+
+    expect(boardB.getBoard()).toStrictEqual(boardA.getBoard());
+  });
 });
