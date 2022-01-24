@@ -276,4 +276,29 @@ describe('Gameboard', () => {
       });
     });
   });
+
+  test('reset() should reset the board state', () => {
+    let testBoard = Gameboard();
+    testBoard.placeShip(0, 0, 'vertical', 0);
+    testBoard.recieveAttack(0, 0);
+    testBoard.recieveAttack(1, 0);
+
+    function isBoardEmpty(board) {
+      for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board.length; j++) {
+          let cell = board[i][j];
+          if (cell.shipType !== undefined && cell.index != undefined) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    testBoard.reset();
+
+    expect(isBoardEmpty(testBoard.getBoard())).toBe(true);
+    expect(testBoard.missedShots).toStrictEqual([]);
+    expect(testBoard.getShip(0).isHit()).toBe(false);
+  });
 });
