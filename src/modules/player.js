@@ -1,31 +1,31 @@
 import * as util from './util';
 
 class Player {
-  constructor(playerName, playerType = '') {
-    this._playerName = playerName;
-    this._playerType = playerType;
+  constructor(name, type = '') {
+    this._name = name;
+    this._type = type;
     this._isPreviousHit = false;
     this._nextAttack = null;
   }
 
-  set playerName(player_name) {
-    this._playerName = player_name;
+  set name(name) {
+    this._name = name;
   }
 
-  set playerType(player_type) {
-    this._playerType = player_type;
+  set type(type) {
+    this._type = type;
   }
 
-  get playerName() {
-    return this._playerName;
+  get name() {
+    return this._name;
   }
 
-  get playerType() {
-    return this._playerType;
+  get type() {
+    return this._type;
   }
 
   isAi() {
-    return this._playerType === 'ai';
+    return this._type === 'ai';
   }
 
   #isCellAlreadyHit(cell, enemyBoard) {
@@ -94,7 +94,7 @@ class Player {
   }
 
   attack(x, y, enemyBoard) {
-    if (this._playerType === 'ai') {
+    if (this._type === 'ai') {
       this.#cpuAttack(enemyBoard);
     } else {
       enemyBoard.recieveAttack(x, y);
