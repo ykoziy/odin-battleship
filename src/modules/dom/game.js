@@ -11,16 +11,16 @@ const Game = (gameElementName, playerOne, playerTwo, restartCallback) => {
 
     gameOverRestartBtn.addEventListener('click', restartBtnHandler);
 
-    nameElements[0].innerText = playerOne.playerName;
-    nameElements[1].innerText = playerTwo.playerName;
+    nameElements[0].innerText = playerOne.name;
+    nameElements[1].innerText = playerTwo.name;
   }
 
   function displayWinner(winner) {
     gameOverElement.style.display = 'flex';
     if (winner === 1) {
-      gameOverText.innerText = `Player ${playerOne.playerName} wins the game.`;
+      gameOverText.innerText = `Player ${playerOne.name} wins the game.`;
     } else if (winner === 2) {
-      gameOverText.innerText = `Player ${playerTwo.playerName} wins the game.`;
+      gameOverText.innerText = `Player ${playerTwo.name} wins the game.`;
     }
   }
 
