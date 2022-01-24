@@ -116,10 +116,10 @@ describe('Gameboard', () => {
     beforeEach(() => {
       board = Gameboard();
       board.placeShip(0, 0, 'vertical', 0);
-      board.placeShip(1, 0, 'vertical', 1);
-      board.placeShip(2, 0, 'vertical', 2);
-      board.placeShip(3, 0, 'vertical', 3);
-      board.placeShip(4, 0, 'vertical', 4);
+      board.placeShip(2, 0, 'vertical', 1);
+      board.placeShip(4, 0, 'vertical', 2);
+      board.placeShip(6, 0, 'vertical', 3);
+      board.placeShip(8, 0, 'vertical', 4);
 
       //sink the carrier
       board.recieveAttack(0, 0);
@@ -129,23 +129,23 @@ describe('Gameboard', () => {
       board.recieveAttack(0, 4);
 
       //sink the battleship
-      board.recieveAttack(1, 0);
-      board.recieveAttack(1, 1);
-      board.recieveAttack(1, 2);
-      board.recieveAttack(1, 3);
-
-      //sink the cruiser
       board.recieveAttack(2, 0);
       board.recieveAttack(2, 1);
       board.recieveAttack(2, 2);
+      board.recieveAttack(2, 3);
+
+      //sink the cruiser
+      board.recieveAttack(4, 0);
+      board.recieveAttack(4, 1);
+      board.recieveAttack(4, 2);
 
       //sink the submarine
-      board.recieveAttack(3, 0);
-      board.recieveAttack(3, 1);
-      board.recieveAttack(3, 2);
+      board.recieveAttack(6, 0);
+      board.recieveAttack(6, 1);
+      board.recieveAttack(6, 2);
 
       //hit the destroyer
-      board.recieveAttack(4, 0);
+      board.recieveAttack(8, 0);
     });
 
     it('should return false if there is still one ship left alive', () => {
@@ -153,7 +153,7 @@ describe('Gameboard', () => {
     });
 
     it('should return true if all the ships are hit and sunk', () => {
-      board.recieveAttack(4, 1);
+      board.recieveAttack(8, 1);
       expect(board.isFleetSunk()).toEqual(true);
     });
   });
