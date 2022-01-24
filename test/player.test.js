@@ -2,6 +2,35 @@ import Player from '../src/modules/player';
 import Gameboard from '../src/modules/gameboard';
 
 describe('Player class', () => {
+  describe('testing player class getters/setters', () => {
+    let playerAlice, boardAlice, playerBob, boardBob;
+
+    beforeEach(() => {
+      playerAlice = new Player('Alice');
+      playerBob = new Player('Bob', 'ai');
+    });
+
+    afterEach(() => {
+      playerAlice = new Player('Alice');
+      playerBob = new Player('Bob', 'ai');
+    });
+
+    it('should allow to change name after player is created', () => {
+      playerAlice.name = 'Alicia';
+      expect(playerAlice.name).toBe('Alicia');
+    });
+
+    it('should allow to change the player type after player is created', () => {
+      playerBob.type = '';
+      expect(playerBob.type).toBe('');
+    });
+
+    it('should allow to check if player is AI', () => {
+      playerAlice.type = 'ai';
+      expect(playerAlice.isAi()).toBe(true);
+    });
+  });
+
   describe('testing player vs. player game', () => {
     let playerAlice, boardAlice, playerBob, boardBob;
 
