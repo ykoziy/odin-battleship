@@ -86,7 +86,6 @@ const App = (state) => {
   }
 
   function placementMenu(name) {
-    console.log('placing');
     playerName = name;
     appState = 'PLACE';
     init();

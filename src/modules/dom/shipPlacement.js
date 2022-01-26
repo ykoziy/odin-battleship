@@ -109,7 +109,6 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
   }
 
   function endDragHandler(event) {
-    console.log(event);
     if (event.dataTransfer.dropEffect == 'none') {
       event.target.style.opacity = 1;
       dragged = null;
