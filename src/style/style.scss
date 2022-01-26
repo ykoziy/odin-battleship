@@ -37,8 +37,10 @@
   --cell-width: var(--cell-height);
 }
 
-$bg-color: seagreen;
+$bg-color: #4c5760;
 $ship-color: #879496;
+$app-container-bg: #93a8ac;
+$button-color: #a59e8c;
 
 html {
   font-size: 62.5%;
@@ -50,6 +52,15 @@ h1 {
 
 h2 {
   font-size: 2.4rem;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: #a59e8c;
+  border: 3px solid #66635b;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 body {
@@ -117,13 +128,14 @@ footer a:hover {
   }
 
   #game-over-box {
-    background-color: beige;
+    background-color: #93a8ac;
     gap: 20px;
     padding: 45px;
     position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
     button {
       height: 50px;
       width: 150px;
@@ -138,6 +150,7 @@ footer a:hover {
   justify-content: center;
   width: 750px;
   height: 430px;
+  border-radius: 10px;
   @include respond(mobile) {
     width: 100vw;
     padding: 0 25px 0 25px;
@@ -152,24 +165,25 @@ footer a:hover {
 
 #main-menu {
   display: flex;
-  background-color: lightseagreen;
+  background-color: $app-container-bg;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 }
 
 #player-name-entry {
   display: none;
-  background-color: lightseagreen;
+  background-color: $app-container-bg;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   gap: 25px;
-
+  border-radius: 10px;
   input {
     padding: 10px;
   }
