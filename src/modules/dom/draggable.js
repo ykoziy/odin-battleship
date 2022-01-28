@@ -27,12 +27,8 @@ const Draggable = (element) => {
   }
 
   function moveGhost(x, y) {
-    if (x > 0 && x < window.innerWidth && y > 0 && y < window.innerHeight) {
-      dragged.style.left = `${x}px`;
-      dragged.style.top = `${y}px`;
-    } else {
-      stop();
-    }
+    dragged.style.left = `${x}px`;
+    dragged.style.top = `${y}px`;
   }
 
   function mouseUp(e) {
@@ -55,20 +51,26 @@ const Draggable = (element) => {
 
   function mouseMove(e) {
     window.getSelection().removeAllRanges();
-    moveGhost(e.clientX, e.clientY);
-    dragged.hidden = true;
-    let elemBelow = document.elementFromPoint(e.clientX, e.clientY);
-    dragged.hidden = false;
-    if (elemBelow.className === 'board-cell') {
-      if (currentDrop != elemBelow) {
-        if (currentDrop) {
-          leaveTarget(currentDrop);
-        }
-        currentDrop = elemBelow;
-        if (currentDrop) {
-          enterTarget(currentDrop);
+    let x = e.clientX;
+    let y = e.clientY;
+    if (x > 0 && x < window.innerWidth && y > 0 && y < window.innerHeight) {
+      moveGhost(x, y);
+      dragged.hidden = true;
+      let elemBelow = document.elementFromPoint(x, y);
+      dragged.hidden = false;
+      if (elemBelow.className === 'board-cell') {
+        if (currentDrop != elemBelow) {
+          if (currentDrop) {
+            leaveTarget(currentDrop);
+          }
+          currentDrop = elemBelow;
+          if (currentDrop) {
+            enterTarget(currentDrop);
+          }
         }
       }
+    } else {
+      stop();
     }
   }
 
