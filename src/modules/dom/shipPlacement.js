@@ -139,7 +139,7 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
 
   function deleteDragListeners() {
     draggables.forEach((element) => {
-      element.unset;
+      element.unset();
     });
     Array(...board.children).forEach((element) => {
       element.removeEventListener('shipdropped', dropHandler, false);
