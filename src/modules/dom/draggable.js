@@ -54,6 +54,7 @@ const Draggable = (element) => {
   }
 
   function mouseMove(e) {
+    window.getSelection().removeAllRanges();
     moveGhost(e.clientX, e.clientY);
     dragged.hidden = true;
     let elemBelow = document.elementFromPoint(e.clientX, e.clientY);
