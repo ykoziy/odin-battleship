@@ -68,6 +68,11 @@ const Draggable = (element) => {
             enterTarget(currentDrop);
           }
         }
+      } else {
+        if (currentDrop) {
+          leaveTarget(currentDrop);
+          currentDrop = null;
+        }
       }
     } else {
       stop();
