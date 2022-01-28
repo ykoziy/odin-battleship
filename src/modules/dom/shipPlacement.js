@@ -1,17 +1,18 @@
 import Gameboard from '../gameboard';
+import Draggable from './draggable';
 
 const ShipPlacement = (placementElement, setAppStateCallback) => {
   const thisElement = document.querySelector(placementElement);
   const board = document.querySelector(`${placementElement} .ship-board`);
   const ships = document.querySelector(`${placementElement} #ships`);
   const battleshipBoard = Gameboard();
+  let draggables = [];
 
   const placementMenu = document.querySelector(
     `${placementElement} #placement-menu`,
   );
 
   let placementCount = 5;
-  let dragged;
 
   function show() {
     thisElement.style.display = 'flex';
@@ -19,8 +20,10 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
       reset();
       return;
     }
+
     drawShipPlacementBoard();
     setDragListeners();
+
     placementMenu.querySelector('#reset-btn').addEventListener('click', reset);
     placementMenu.querySelector('#ready-btn').addEventListener('click', ready);
     placementMenu
@@ -100,45 +103,12 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
     }
   }
 
-  function startDragHandler(event) {
-    event.dataTransfer.effectAllowed = 'move';
-    if (event.target.id.includes('ship-')) {
-      dragged = event.target;
-      event.target.style.opacity = 0.5;
-    }
-  }
-
-  function endDragHandler(event) {
-    if (event.dataTransfer.dropEffect == 'none') {
-      event.target.style.opacity = 1;
-      dragged = null;
-    }
-  }
-
-  function dragOverHandler(event) {
-    event.preventDefault();
-  }
-
-  function dragEnterHandler(event) {
-    event.preventDefault();
-    if (event.target.className == 'board-cell' && dragged !== undefined) {
-      event.target.style.backgroundColor = 'red';
-    }
-  }
-
-  function dragLeaveHandler(event) {
-    if (event.target.className == 'board-cell') {
-      event.target.style.backgroundColor = '';
-    }
-  }
-
   function dropHandler(event) {
-    event.preventDefault();
-    if (event.target.className == 'board-cell' && dragged !== undefined) {
+    if (event.target.className == 'board-cell') {
       event.target.style.backgroundColor = '';
       const x = Number(event.target.dataset.x);
       const y = Number(event.target.dataset.y);
-      const shipType = Number(dragged.dataset.shipType);
+      const shipType = Number(event.detail.shipType);
       const isShipPlaced = battleshipBoard.placeShip(
         x,
         y,
@@ -146,14 +116,10 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
         shipType,
       );
       if (isShipPlaced) {
-        dragged.setAttribute('draggable', false);
-        dragged.removeEventListener('dragstart', startDragHandler, false);
+        draggables[Number(event.detail.shipType)].unset();
         updatePlacementBoard();
+        //dragged.removeEventListener('dragstart', startDragHandler, false);
         placementCount--;
-        dragged.style.opacity = 0.5;
-        dragged = undefined;
-      } else {
-        dragged.style.opacity = 1;
       }
       if (placementCount === 0) {
         placementMenu.querySelector('#ready-btn').removeAttribute('disabled');
@@ -163,27 +129,20 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
 
   function setDragListeners() {
     Array(...ships.children).forEach((element) => {
-      element.addEventListener('dragstart', startDragHandler, false);
-      element.addEventListener('dragend', endDragHandler, false);
+      draggables.push(Draggable(element));
     });
+
     Array(...board.children).forEach((element) => {
-      element.addEventListener('dragenter', dragEnterHandler, false);
-      element.addEventListener('dragover', dragOverHandler, false);
-      element.addEventListener('dragleave', dragLeaveHandler, false);
-      element.addEventListener('drop', dropHandler, false);
+      element.addEventListener('shipdropped', dropHandler);
     });
   }
 
   function deleteDragListeners() {
-    Array(...ships.children).forEach((element) => {
-      element.removeEventListener('dragstart', startDragHandler, false);
-      element.removeEventListener('dragend', endDragHandler, false);
+    draggables.forEach((element) => {
+      element.unset;
     });
     Array(...board.children).forEach((element) => {
-      element.removeEventListener('dragenter', dragEnterHandler, false);
-      element.removeEventListener('dragover', dragOverHandler, false);
-      element.removeEventListener('dragleave', dragLeaveHandler, false);
-      element.removeEventListener('drop', dropHandler, false);
+      element.removeEventListener('shipdropped', dropHandler, false);
     });
   }
 
@@ -198,7 +157,6 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
     placementMenu.querySelector('#ready-btn').setAttribute('disabled', false);
     battleshipBoard.reset();
     placementCount = 5;
-    dragged = null;
     deleteDragListeners();
     setDragListeners();
     resetShips();
