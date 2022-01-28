@@ -268,6 +268,51 @@ footer a:hover {
   }
 }
 
+#ship-carrier,
+#dragging-carrier {
+  background-color: $ship-color;
+  border: 2px solid black;
+  height: 40px;
+  width: 40px * 5;
+  cursor: move;
+}
+
+#ship-battleship,
+#dragging-battleship {
+  background-color: $ship-color;
+  border: 2px solid black;
+  height: 40px;
+  width: 40px * 4;
+  cursor: move;
+}
+
+#ship-cruiser,
+#dragging-cruiser {
+  background-color: $ship-color;
+  border: 2px solid black;
+  height: 40px;
+  width: 40px * 3;
+  cursor: move;
+}
+
+#ship-submarine,
+#dragging-submarine {
+  background-color: $ship-color;
+  border: 2px solid black;
+  height: 40px;
+  width: 40px * 3;
+  cursor: move;
+}
+
+#ship-destroyer,
+#dragging-destroyer {
+  background-color: $ship-color;
+  border: 2px solid black;
+  height: 40px;
+  width: 40px * 2;
+  cursor: move;
+}
+
 #ship-selection {
   display: flex;
   flex-direction: column;
@@ -286,45 +331,5 @@ footer a:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-    #ship-carrier {
-      background-color: $ship-color;
-      border: 2px solid black;
-      height: 40px;
-      width: 40px * 5;
-      cursor: move;
-    }
-
-    #ship-battleship {
-      background-color: $ship-color;
-      border: 2px solid black;
-      height: 40px;
-      width: 40px * 4;
-      cursor: move;
-    }
-
-    #ship-cruiser {
-      background-color: $ship-color;
-      border: 2px solid black;
-      height: 40px;
-      width: 40px * 3;
-      cursor: move;
-    }
-
-    #ship-submarine {
-      background-color: $ship-color;
-      border: 2px solid black;
-      height: 40px;
-      width: 40px * 3;
-      cursor: move;
-    }
-
-    #ship-destroyer {
-      background-color: $ship-color;
-      border: 2px solid black;
-      height: 40px;
-      width: 40px * 2;
-      cursor: move;
-    }
   }
 }
