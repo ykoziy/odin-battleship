@@ -105,10 +105,10 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
 
   function dropHandler(event) {
     if (event.target.className == 'board-cell') {
+      const shipType = Number(event.detail.shipType);
       event.target.style.backgroundColor = '';
       const x = Number(event.target.dataset.x);
       const y = Number(event.target.dataset.y);
-      const shipType = Number(event.detail.shipType);
       const isShipPlaced = battleshipBoard.placeShip(
         x,
         y,
@@ -116,9 +116,9 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
         shipType,
       );
       if (isShipPlaced) {
-        draggables[Number(event.detail.shipType)].unset();
+        draggables[shipType].unset();
         updatePlacementBoard();
-        //dragged.removeEventListener('dragstart', startDragHandler, false);
+        indicatePlacedShip(shipType);
         placementCount--;
       }
       if (placementCount === 0) {
@@ -146,9 +146,12 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
     });
   }
 
+  function indicatePlacedShip(shipType) {
+    ships.children[shipType].style.opacity = 0.5;
+  }
+
   function resetShips() {
     Array(...ships.children).forEach((element) => {
-      element.setAttribute('draggable', true);
       element.style.opacity = 1;
     });
   }
