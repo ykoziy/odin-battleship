@@ -10,7 +10,8 @@ const Draggable = (element) => {
   }
 
   function mouseDown(e) {
-    createGhost(e.clientX, e.clientY);
+    let { x, y } = getCoords(e);
+    createGhost(x, y);
     dragged.addEventListener('mouseup', mouseUp);
     document.addEventListener('mousemove', mouseMove);
   }
@@ -32,8 +33,9 @@ const Draggable = (element) => {
   }
 
   function mouseUp(e) {
+    let { x, y } = getCoords(e);
     dragged.hidden = true;
-    let elemBelow = document.elementFromPoint(e.clientX, e.clientY);
+    let elemBelow = document.elementFromPoint(x, y);
     dragged.hidden = false;
     let fakeDrop = new CustomEvent('shipdropped', {
       detail: {
@@ -49,10 +51,13 @@ const Draggable = (element) => {
     document.body.removeChild(dragged);
   }
 
+  function getCoords(event) {
+    return { x: event.clientX, y: event.clientY };
+  }
+
   function mouseMove(e) {
     window.getSelection().removeAllRanges();
-    let x = e.clientX;
-    let y = e.clientY;
+    let { x, y } = getCoords(e);
     if (x > 0 && x < window.innerWidth && y > 0 && y < window.innerHeight) {
       moveGhost(x, y);
       dragged.hidden = true;
