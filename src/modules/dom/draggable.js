@@ -6,7 +6,7 @@ const Draggable = (element) => {
 
   function addEventListener() {
     element.addEventListener('mousedown', mouseDown);
-    element.addEventListener('dragstart', (e) => e.preventDefault());
+    element.addEventListener('dragstart', preventDefault);
   }
 
   function mouseDown(e) {
@@ -78,6 +78,19 @@ const Draggable = (element) => {
   function leaveTarget(el) {
     el.style.backgroundColor = '';
   }
+
+  function preventDefault(e) {
+    e.preventDefault();
+  }
+
+  function unset() {
+    currentDrop = null;
+    document.removeEventListener('mousemove', mouseMove);
+    element.removeEventListener('mousedown', mouseDown);
+    element.removeEventListener('dragstart', preventDefault);
+  }
+
+  return { unset };
 };
 
 export default Draggable;
