@@ -130,6 +130,9 @@ const Draggable = (element) => {
         }
       }
     } else {
+      if (currentDrop) {
+        leaveTarget(currentDrop);
+      }
       stop();
     }
   }
