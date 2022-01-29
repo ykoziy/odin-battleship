@@ -275,6 +275,7 @@ footer a:hover {
   height: 40px;
   width: 40px * 5;
   cursor: move;
+  touch-action: none;
 }
 
 #ship-battleship,
@@ -284,6 +285,7 @@ footer a:hover {
   height: 40px;
   width: 40px * 4;
   cursor: move;
+  touch-action: none;
 }
 
 #ship-cruiser,
@@ -293,6 +295,7 @@ footer a:hover {
   height: 40px;
   width: 40px * 3;
   cursor: move;
+  touch-action: none;
 }
 
 #ship-submarine,
@@ -302,6 +305,7 @@ footer a:hover {
   height: 40px;
   width: 40px * 3;
   cursor: move;
+  touch-action: none;
 }
 
 #ship-destroyer,
@@ -311,6 +315,7 @@ footer a:hover {
   height: 40px;
   width: 40px * 2;
   cursor: move;
+  touch-action: none;
 }
 
 #ship-selection {
