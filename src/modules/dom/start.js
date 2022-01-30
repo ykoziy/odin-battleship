@@ -9,6 +9,7 @@ const Start = (startMenuElement, setAppStateCallback) => {
   let currentPage = '';
   let playerInputNum = 1;
   let numPlayers = 1;
+  let playerOneName, playerTwoName;
 
   function show() {
     currentPage = 'main-menu';
@@ -66,7 +67,6 @@ const Start = (startMenuElement, setAppStateCallback) => {
         startGame(playerName);
       }
     } else if (numPlayers == 2) {
-      let playerOneName, playerTwoName;
       if (playerInputNum == 1) {
         playerOneName = getPlayerName();
         if (playerOneName) {
