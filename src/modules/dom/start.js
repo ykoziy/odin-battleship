@@ -14,6 +14,8 @@ const Start = (startMenuElement, setAppStateCallback) => {
   function show() {
     currentPage = 'main-menu';
     startMenu.style.display = 'flex';
+    startMain.style.display = 'flex';
+    startEntry.style.display = 'none';
     startBtn.addEventListener('click', handleStartClick);
     startTwoBtn.addEventListener('click', handleStartTwoClick);
   }
