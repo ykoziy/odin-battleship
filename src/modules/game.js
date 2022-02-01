@@ -6,6 +6,7 @@ const Game = (
   playerTwo,
   playerTwoBoard,
   displayWinnerCallback,
+  setTurnCallback,
 ) => {
   const playerBoardElement = '#player-board-container .game-board';
   const enemyBoardElement = '#enemy-board-container .game-board';
