@@ -46,6 +46,23 @@ const Game = (
   function update() {
     playerBoardUI.updateBoard(playerOneBoard);
     enemyBoardUI.updateBoard(playerTwoBoard, false);
+    enemyBoardUI.updateMoveHandlers(playerTwoBoard, userInput);
+  }
+
+  function flipBoards() {
+    if (playerOneTurn) {
+      playerBoardUI.reset();
+      enemyBoardUI.reset();
+      playerBoardUI.updateBoard(playerOneBoard);
+      enemyBoardUI.updateBoard(playerTwoBoard, false);
+      enemyBoardUI.updateMoveHandlers(playerTwoBoard, userInput);
+    } else {
+      playerBoardUI.reset();
+      enemyBoardUI.reset();
+      playerBoardUI.updateBoard(playerTwoBoard);
+      enemyBoardUI.updateBoard(playerOneBoard, false);
+      enemyBoardUI.updateMoveHandlers(playerTwoBoard, userInput);
+    }
   }
 
   function nextTurn() {
@@ -55,7 +72,6 @@ const Game = (
   function userInput(event) {
     let x = Number(event.target.dataset.x);
     let y = Number(event.target.dataset.y);
-    event.target.removeEventListener('click', userInput);
     gameTurn(x, y);
   }
 
