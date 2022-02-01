@@ -25,7 +25,10 @@ const Game = (gameElementName, playerOne, playerTwo, restartCallback) => {
 
   function restartBtnHandler() {
     gameOverElement.style.display = 'none';
-    restartCallback();
+    if (typeof restartCallback === 'function') {
+      restartCallback();
+      restartCallback = null;
+    }
   }
 
   function setBoardNames(turn) {

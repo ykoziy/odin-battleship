@@ -43,6 +43,7 @@ const Start = (startMenuElement, setAppStateCallback) => {
     startMenu.style.display = 'none';
     if (typeof setAppStateCallback === 'function') {
       setAppStateCallback(playerName);
+      setAppStateCallback = null;
     }
   }
 
@@ -50,6 +51,7 @@ const Start = (startMenuElement, setAppStateCallback) => {
     startMenu.style.display = 'none';
     if (typeof setAppStateCallback === 'function') {
       setAppStateCallback(playerOneName, playerTwoName);
+      setAppStateCallback = null;
     }
   }
 
