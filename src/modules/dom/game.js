@@ -1,30 +1,46 @@
+import * as domutil from './util';
+
 const Game = (gameElementName, playerOne, playerTwo, restartCallback) => {
   const gameBoard = document.querySelector(gameElementName);
-  const gameOverElement = document.querySelector('#game-over');
-  const gameOverText = gameOverElement.querySelector('#won-text');
-  const gameOverRestartBtn = gameOverElement.querySelector('#restart-btn');
   const nameElements = gameBoard.querySelectorAll(
     '#player-one-name, #player-two-name',
   );
 
   function init() {
-    gameOverRestartBtn.addEventListener('click', restartBtnHandler);
-
     nameElements[0].innerText = playerOne.name;
     nameElements[1].innerText = playerTwo.name;
   }
 
   function displayWinner(winner) {
-    gameOverElement.style.display = 'flex';
+    const html = `
+        <div id='game-over-box'>
+          <h1>Game Over!</h1>
+          <h2 id='won-text'>Player Wins</h2>
+          <button id='restart-btn'>Restart</button>
+        </div>
+    `;
+
+    const gameOverElement = document.createElement('div');
+
+    gameOverElement.id = 'game-over';
+    gameOverElement.innerHTML = html;
+    domutil.insert(gameOverElement);
+
+    const gameOverText = gameOverElement.querySelector('#won-text');
+
     if (winner === 1) {
       gameOverText.innerText = `Player ${playerOne.name} wins the game.`;
     } else if (winner === 2) {
       gameOverText.innerText = `Player ${playerTwo.name} wins the game.`;
     }
+
+    gameOverElement
+      .querySelector('#restart-btn')
+      .addEventListener('click', restartBtnHandler);
   }
 
   function restartBtnHandler() {
-    gameOverElement.style.display = 'none';
+    document.querySelector('#game-over').remove();
     if (typeof restartCallback === 'function') {
       restartCallback();
       restartCallback = null;
