@@ -54,6 +54,10 @@ h2 {
   font-size: 2.4rem;
 }
 
+p {
+  font-size: 1.9rem;
+}
+
 button {
   outline: none;
   border: none;
@@ -173,6 +177,29 @@ footer a:hover {
   height: 100%;
   border-radius: 10px;
   gap: 25px;
+}
+
+#pass-device {
+  display: none;
+  background-color: $app-container-bg;
+  gap: 25px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 750px;
+  height: 430px;
+  border-radius: 10px;
+
+  @include respond(mobile) {
+    width: 100vw;
+    padding: 0 25px 0 25px;
+    height: 330px;
+  }
+
+  button {
+    height: 50px;
+    width: 150px;
+  }
 }
 
 #player-name-entry {
