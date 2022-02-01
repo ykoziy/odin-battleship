@@ -1,4 +1,4 @@
-const PassDevice = () => {
+const PassDevice = (callback) => {
   const thisElement = document.querySelector('#pass-device');
   const passBtn = thisElement.querySelector('#pass-btn');
 
@@ -9,6 +9,10 @@ const PassDevice = () => {
 
   function handleContinueClick() {
     thisElement.style.display = 'none';
+    if (typeof callback === 'function') {
+      callback();
+      callback = null;
+    }
   }
 
   return { show };
