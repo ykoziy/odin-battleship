@@ -34,7 +34,6 @@ const Game = (
 
   function start() {
     playerOneTurn = getRandomFirstTurn();
-    playerOneTurn = false;
     if (!playerOneTurn && playerTwo.isAi()) {
       aiPlayerMove();
     } else if (!playerOneTurn && !playerTwo.isAi()) {
@@ -42,7 +41,7 @@ const Game = (
       passDevice(playerTwo.name);
       flipBoards();
     } else {
-      if (playerTwo.isAI()) {
+      if (playerTwo.isAi()) {
         update();
       } else {
         setTurnCallback(1);
