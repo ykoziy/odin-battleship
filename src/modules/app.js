@@ -52,18 +52,9 @@ const App = (state) => {
 
     mainGameUI.init();
 
-    function populateDummyBoards(boardTwo) {
-      boardTwo.placeShip(0, 0, 'vertical', 0);
-      boardTwo.placeShip(3, 9, 'horizontal', 1);
-      boardTwo.placeShip(3, 4, 'vertical', 2);
-      boardTwo.placeShip(6, 5, 'horizontal', 3);
-      boardTwo.placeShip(8, 0, 'horizontal', 4);
-    }
-
     const playerOneBoard = Gameboard();
     playerOneBoard.setBoard(gBoard.getBoard());
     const playerTwoBoard = Gameboard();
-    //populateDummyBoards(playerTwoBoard);
     playerTwoBoard.placeShipsRandomly();
 
     if (
