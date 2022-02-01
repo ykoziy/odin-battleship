@@ -29,7 +29,13 @@ const Game = (gameElementName, playerOne, playerTwo, restartCallback) => {
     restartCallback();
   }
 
-  return { init, displayWinner };
+  function setTurnIndicator(playerName) {
+    const titleElement = gameBoard.querySelector('#info-panel h2');
+    titleElement.style.display = 'flex';
+    titleElement.innerHTML = `${playerName}, your turn.`;
+  }
+
+  return { init, displayWinner, setTurnIndicator };
 };
 
 export default Game;
