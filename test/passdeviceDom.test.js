@@ -37,4 +37,15 @@ describe('Test pass device screen', () => {
 
     expect(validateElement.style.display).toEqual('none');
   });
+
+  it('should display "Player one, press continue when ready." when calling passTo("Player one")', () => {
+    passdeviceUI.show();
+    passdeviceUI.passTo('Player one');
+
+    const validateElement = document.querySelector('#pass-device p');
+
+    expect(validateElement.innerHTML).toBe(
+      'Player one, press continue when ready.',
+    );
+  });
 });
