@@ -5,10 +5,12 @@ import { default as GameDom } from './dom/game';
 import Player from './player';
 import Gameboard from './gameboard';
 import Game from './game';
+import PassDevice from './dom/passdevice';
 
 const App = (state) => {
   let appState = state;
-  let board, playerName;
+  let playerCount = 1;
+  let gBoard, gBoardTwo, playerOneName, playerTwoName;
 
   function initGameStart() {
     const gameStartElement = '#game-start';
@@ -18,8 +20,21 @@ const App = (state) => {
 
   function initPlaceShips() {
     const placementElement = '#ship-placement';
-    const shipPlacementUI = ShipPlacementDom(placementElement, runGame);
-    shipPlacementUI.show();
+    if (playerCount == 1) {
+      const shipPlacementUI = ShipPlacementDom(
+        placementElement,
+        runGame,
+        playerOneName,
+      );
+      shipPlacementUI.show();
+    } else if (playerCount == 2) {
+      let shipPlacementUI = ShipPlacementDom(
+        placementElement,
+        getPlayerOneBoard,
+        playerOneName,
+      );
+      shipPlacementUI.show();
+    }
   }
 
   function initGame() {
@@ -30,7 +45,7 @@ const App = (state) => {
     const playerBoardUI = GameboardDOM(playerBoardElement);
     const enemyBoardUI = GameboardDOM(enemyBoardElement);
 
-    const playerOne = new Player(playerName, '');
+    const playerOne = new Player(playerOneName, '');
     const playerTwo = new Player('Bob', 'ai');
 
     const mainGameUI = GameDom('#game', playerOne, playerTwo, startGame);
@@ -46,7 +61,7 @@ const App = (state) => {
     }
 
     const playerOneBoard = Gameboard();
-    playerOneBoard.setBoard(board.getBoard());
+    playerOneBoard.setBoard(gBoard.getBoard());
     const playerTwoBoard = Gameboard();
     //populateDummyBoards(playerTwoBoard);
     playerTwoBoard.placeShipsRandomly();
@@ -80,13 +95,38 @@ const App = (state) => {
   }
 
   function runGame(gameBoard) {
-    board = gameBoard;
+    gBoard = gameBoard;
     appState = 'RUN';
-    initGame();
+    init();
   }
 
-  function placementMenu(name) {
-    playerName = name;
+  function getPlayerOneBoard(gameBoard) {
+    gBoard = gameBoard;
+    const passdeviceDom = PassDevice(getPlayerTwoBoard);
+    passdeviceDom.show();
+  }
+
+  function getPlayerTwoBoard() {
+    const placementElement = '#ship-placement';
+    let shipPlacementUI = ShipPlacementDom(
+      placementElement,
+      runTwoPlayerGame,
+      playerTwoName,
+    );
+    shipPlacementUI.show();
+  }
+
+  function runTwoPlayerGame(gameBoard) {
+    gBoardTwo = gameBoard;
+    console.log('run two player game');
+  }
+
+  function placementMenu(pOneName, pTwoName) {
+    playerOneName = pOneName;
+    if (pTwoName) {
+      playerTwoName = pTwoName;
+      playerCount = 2;
+    }
     appState = 'PLACE';
     init();
   }
