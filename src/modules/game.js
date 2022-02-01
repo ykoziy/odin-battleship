@@ -75,7 +75,7 @@ const Game = (
       enemyBoardUI.reset();
       playerBoardUI.updateBoard(playerTwoBoard);
       enemyBoardUI.updateBoard(playerOneBoard, false);
-      enemyBoardUI.updateMoveHandlers(playerTwoBoard, userInput);
+      enemyBoardUI.updateMoveHandlers(playerOneBoard, userInput);
     }
   }
 
