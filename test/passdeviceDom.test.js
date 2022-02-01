@@ -8,11 +8,7 @@ describe('Test pass device screen', () => {
 
   beforeEach(() => {
     document.body.innerHTML = `
-    <main id ='pass-device' style='display: none;'>
-      <h1>Pass the device</h1>
-      <p>Next player press continue when ready.</p>
-      <button id='pass-btn'>Continue</button>
-    </main>  
+    <footer></footer>
     `;
     passdeviceUI = PassDevice();
   });
@@ -24,23 +20,23 @@ describe('Test pass device screen', () => {
   it('should unhide by calling show()', () => {
     passdeviceUI.show();
     const validateElement = document.querySelector('#pass-device');
-    expect(validateElement.style.display).toEqual('flex');
+    expect(validateElement).toBeTruthy();
   });
 
   it('should hide by clicking on Continue', () => {
     passdeviceUI.show();
     const btnElement = document.querySelector('#pass-btn');
-    const validateElement = document.querySelector('#pass-device');
 
     let evt = new Event('click');
     btnElement.dispatchEvent(evt);
+    const validateElement = document.querySelector('#pass-device');
 
-    expect(validateElement.style.display).toEqual('none');
+    expect(validateElement).toBeFalsy();
   });
 
-  it('should display "Player one, press continue when ready." when calling passTo("Player one")', () => {
+  it('should display "Player one, press continue when ready." when calling PassDevice("Player one", null)', () => {
+    passdeviceUI = PassDevice('Player one', null);
     passdeviceUI.show();
-    passdeviceUI.passTo('Player one');
 
     const validateElement = document.querySelector('#pass-device p');
 
