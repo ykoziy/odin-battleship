@@ -49,7 +49,15 @@ const Game = (gameElementName, playerOne, playerTwo, restartCallback) => {
     }
   }
 
-  return { init, displayWinner, setTurnIndicator };
+  function hide() {
+    gameBoard.style.display = 'none';
+  }
+
+  function show() {
+    gameBoard.style.display = 'flex';
+  }
+
+  return { init, displayWinner, setTurnIndicator, hide, show };
 };
 
 export default Game;
