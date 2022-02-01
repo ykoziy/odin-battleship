@@ -82,6 +82,8 @@ const App = (state) => {
       playerTwoBoard,
       mainGameUI.displayWinner,
       mainGameUI.setTurnIndicator,
+      mainGameUI.show,
+      mainGameUI.hide,
     );
     enemyBoardUI.addMoveHandler(game.userInput);
     game.start();

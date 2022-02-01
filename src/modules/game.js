@@ -1,4 +1,5 @@
 import { default as GameboardDOM } from './dom/gameboard';
+import PassDevice from './dom/passdevice';
 
 const Game = (
   playerOne,
@@ -7,6 +8,8 @@ const Game = (
   playerTwoBoard,
   displayWinnerCallback,
   setTurnCallback,
+  showCallback,
+  hideCallback,
 ) => {
   const playerBoardElement = '#player-board-container .game-board';
   const enemyBoardElement = '#enemy-board-container .game-board';
@@ -31,10 +34,21 @@ const Game = (
 
   function start() {
     playerOneTurn = getRandomFirstTurn();
-    if (!playerOneTurn) {
+    playerOneTurn = false;
+    if (!playerOneTurn && playerTwo.isAi()) {
       aiPlayerMove();
+    } else if (!playerOneTurn && !playerTwo.isAi()) {
+      setTurnCallback(2);
+      passDevice(playerTwo.name);
+      flipBoards();
     } else {
-      update();
+      if (playerTwo.isAI()) {
+        update();
+      } else {
+        setTurnCallback(1);
+        passDevice(playerOne.name);
+        flipBoards();
+      }
     }
   }
 
@@ -86,16 +100,35 @@ const Game = (
     }
   }
 
+  function passDevice(playerName) {
+    hideCallback();
+    const pass = PassDevice(showCallback);
+    pass.passTo(playerName);
+    pass.show();
+  }
+
   function gameTurn(x, y) {
     if (playerOneTurn && getWinner() === 0) {
       playerOne.attack(x, y, playerTwoBoard);
-      update();
       nextTurn();
-      gameTurn();
+      if (playerTwo.isAi()) {
+        update();
+        gameTurn();
+      } else {
+        setTurnCallback(2);
+        passDevice(playerTwo.name);
+        flipBoards();
+      }
     } else if (!playerOneTurn && getWinner() === 0) {
-      playerTwo.attack(0, 0, playerOneBoard);
-      update();
+      playerTwo.attack(x, y, playerOneBoard);
       nextTurn();
+      if (playerTwo.isAi()) {
+        update();
+      } else {
+        setTurnCallback(1);
+        passDevice(playerOne.name);
+        flipBoards();
+      }
     } else {
       end();
     }
