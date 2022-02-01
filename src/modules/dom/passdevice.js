@@ -32,7 +32,6 @@ const PassDevice = (playerName, callback) => {
     document.querySelector('#pass-device').remove();
     if (typeof callback === 'function') {
       callback();
-      callback = null;
     }
   }
 
