@@ -1,7 +1,7 @@
 import Gameboard from '../gameboard';
 import Draggable from './draggable';
 
-const ShipPlacement = (placementElement, setAppStateCallback) => {
+const ShipPlacement = (placementElement, setAppStateCallback, playerName) => {
   const thisElement = document.querySelector(placementElement);
   const board = document.querySelector(`${placementElement} .ship-board`);
   const ships = document.querySelector(`${placementElement} #ships`);
@@ -16,13 +16,15 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
 
   function show() {
     thisElement.style.display = 'flex';
+    thisElement.querySelector(
+      '#ship-selection h2',
+    ).innerText = `${playerName}, place your ships!`;
     if (board.querySelector('.board-cell')) {
       reset();
-      return;
+    } else {
+      drawShipPlacementBoard();
+      setDragListeners();
     }
-
-    drawShipPlacementBoard();
-    setDragListeners();
 
     placementMenu.querySelector('#reset-btn').addEventListener('click', reset);
     placementMenu.querySelector('#ready-btn').addEventListener('click', ready);
@@ -141,6 +143,7 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
     draggables.forEach((element) => {
       element.unset();
     });
+    draggables = [];
     Array(...board.children).forEach((element) => {
       element.removeEventListener('shipdropped', dropHandler, false);
     });
@@ -168,7 +171,10 @@ const ShipPlacement = (placementElement, setAppStateCallback) => {
 
   function ready() {
     thisElement.style.display = 'none';
-    setAppStateCallback(battleshipBoard);
+    if (typeof setAppStateCallback === 'function') {
+      setAppStateCallback(battleshipBoard);
+      setAppStateCallback = null;
+    }
   }
 
   function randomPlacement() {
