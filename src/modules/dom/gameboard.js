@@ -69,6 +69,27 @@ const Gameboard = (boardElementName) => {
     }
   }
 
+  function updateMoveHandlers(gBoard, handleMove) {
+    gameBoard.querySelectorAll('.board-cell').forEach((element) => {
+      element.removeEventListener('click', handleMove);
+      const x = Number(element.dataset.x);
+      const y = Number(element.dataset.y);
+      const gameCell = gBoard.getCell(x, y);
+      if (gameCell.shipType !== undefined) {
+        const ship = gBoard.getShip(gameCell.shipType);
+        const index = gameCell.index;
+        if (!ship.isPositionHit(index)) {
+          element.addEventListener('click', handleMove);
+        }
+      } else {
+        const isMissed = gBoard.isAlreadyMissed(x, y);
+        if (!isMissed) {
+          element.addEventListener('click', handleMove);
+        }
+      }
+    });
+  }
+
   function reset() {
     const cells = gameBoard.querySelectorAll('.board-cell');
     cells.forEach((element) => {
@@ -82,6 +103,7 @@ const Gameboard = (boardElementName) => {
     addMoveHandler,
     removeAllMoveHandlers,
     reset,
+    updateMoveHandlers,
   };
 };
 
