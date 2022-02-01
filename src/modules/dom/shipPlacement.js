@@ -170,7 +170,7 @@ const ShipPlacement = (placementElement, setAppStateCallback, playerName) => {
   }
 
   function ready() {
-    thisElement.style.display = 'none';
+    destroy();
     if (typeof setAppStateCallback === 'function') {
       setAppStateCallback(battleshipBoard);
       setAppStateCallback = null;
@@ -184,6 +184,19 @@ const ShipPlacement = (placementElement, setAppStateCallback, playerName) => {
     battleshipBoard.placeShipsRandomly();
     updatePlacementBoard();
     placementMenu.querySelector('#ready-btn').removeAttribute('disabled');
+  }
+
+  function destroy() {
+    thisElement.style.display = 'none';
+    placementMenu
+      .querySelector('#reset-btn')
+      .removeEventListener('click', reset);
+    placementMenu
+      .querySelector('#ready-btn')
+      .removeEventListener('click', ready);
+    placementMenu
+      .querySelector('#random-btn')
+      .removeEventListener('click', randomPlacement);
   }
 
   return { show };
