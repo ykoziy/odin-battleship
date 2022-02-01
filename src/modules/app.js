@@ -46,7 +46,10 @@ const App = (state) => {
     const enemyBoardUI = GameboardDOM(enemyBoardElement);
 
     const playerOne = new Player(playerOneName, '');
-    const playerTwo = new Player('Bob', 'ai');
+    const playerTwo =
+      playerCount == 2
+        ? new Player(playerTwoName, '')
+        : new Player('Bob', 'ai');
 
     const mainGameUI = GameDom('#game', playerOne, playerTwo, startGame);
 
@@ -55,7 +58,11 @@ const App = (state) => {
     const playerOneBoard = Gameboard();
     playerOneBoard.setBoard(gBoard.getBoard());
     const playerTwoBoard = Gameboard();
-    playerTwoBoard.placeShipsRandomly();
+    if (playerCount == 2) {
+      playerTwoBoard.setBoard(gBoardTwo.getBoard());
+    } else {
+      playerTwoBoard.placeShipsRandomly();
+    }
 
     if (
       !document.querySelector(`${playerBoardElement} .board-cell`) &&
@@ -110,7 +117,8 @@ const App = (state) => {
 
   function runTwoPlayerGame(gameBoard) {
     gBoardTwo = gameBoard;
-    console.log('run two player game');
+    appState = 'RUN';
+    init();
   }
 
   function placementMenu(pOneName, pTwoName) {
