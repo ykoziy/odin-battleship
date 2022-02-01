@@ -90,7 +90,6 @@ const App = (state) => {
   }
 
   function startGame() {
-    console.log('start game');
     document.querySelector('#game').style.display = 'none';
     appState = 'START';
     init();
