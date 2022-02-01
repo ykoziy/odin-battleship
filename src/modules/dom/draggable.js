@@ -159,6 +159,10 @@ const Draggable = (element) => {
 
     document.removeEventListener('mouseup', mouseUp);
     document.removeEventListener('touchend', mouseUp);
+
+    element.removeEventListener('mousedown', mouseDown);
+    element.removeEventListener('touchstart', mouseDown);
+    element.removeEventListener('dragstart', preventDefault);
     element.removeEventListener('dragstart', preventDefault);
   }
 
