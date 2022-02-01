@@ -104,7 +104,7 @@ const App = (state) => {
 
   function getPlayerOneBoard(gameBoard) {
     gBoard = gameBoard;
-    const passdeviceDom = PassDevice(getPlayerTwoBoard);
+    const passdeviceDom = PassDevice(playerTwoName, getPlayerTwoBoard);
     passdeviceDom.show();
   }
 

@@ -1,9 +1,10 @@
-const PassDevice = (callback) => {
+const PassDevice = (playerName, callback) => {
   const thisElement = document.querySelector('#pass-device');
   const passBtn = thisElement.querySelector('#pass-btn');
 
   function show() {
     thisElement.style.display = 'flex';
+    passTo(playerName);
     passBtn.addEventListener('click', handleContinueClick);
   }
 
@@ -20,7 +21,7 @@ const PassDevice = (callback) => {
     }
   }
 
-  return { show, passTo };
+  return { show };
 };
 
 export default PassDevice;

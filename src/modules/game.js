@@ -101,8 +101,7 @@ const Game = (
 
   function passDevice(playerName) {
     hideCallback();
-    const pass = PassDevice(showCallback);
-    pass.passTo(playerName);
+    const pass = PassDevice(playerName, showCallback);
     pass.show();
   }
 
