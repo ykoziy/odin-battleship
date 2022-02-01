@@ -40,7 +40,7 @@ const Start = (startMenuElement, setAppStateCallback) => {
   }
 
   function startGame(playerName) {
-    startMenu.style.display = 'none';
+    destroy();
     if (typeof setAppStateCallback === 'function') {
       setAppStateCallback(playerName);
       setAppStateCallback = null;
@@ -48,7 +48,7 @@ const Start = (startMenuElement, setAppStateCallback) => {
   }
 
   function startTwoPlayerGame(playerOneName, playerTwoName) {
-    startMenu.style.display = 'none';
+    destroy();
     if (typeof setAppStateCallback === 'function') {
       setAppStateCallback(playerOneName, playerTwoName);
       setAppStateCallback = null;
@@ -71,19 +71,33 @@ const Start = (startMenuElement, setAppStateCallback) => {
         startGame(playerName);
       }
     } else if (numPlayers == 2) {
+      console.log(playerInputNum);
       if (playerInputNum == 1) {
         playerOneName = getPlayerName();
+        console.log(`get p1 ${playerOneName}`);
         if (playerOneName) {
           playerInputNum = 2;
           showPlayerNameEntry('Player two');
         }
       } else if (playerInputNum == 2) {
         playerTwoName = getPlayerName();
+        console.log(`get p2 ${playerTwoName}`);
         if (playerTwoName) {
           startTwoPlayerGame(playerOneName, playerTwoName);
         }
       }
     }
+  }
+
+  function destroy() {
+    startMenu.style.display = 'none';
+    removehandlers();
+  }
+
+  function removehandlers() {
+    startBtn.removeEventListener('click', handleStartClick);
+    startTwoBtn.removeEventListener('click', handleStartTwoClick);
+    continueBtn.removeEventListener('click', handleContinueClick);
   }
 
   return { show };
