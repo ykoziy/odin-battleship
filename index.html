@@ -23,25 +23,30 @@
       </section>
     </main>
     <main id ='ship-placement'>
-      <div id='ship-selection'>
-        <h2>Place your ships!</h2>
-        <div id='ships'>
-          <div id='ship-carrier' data-ship-type='0'></div>
-          <div id='ship-battleship' data-ship-type='1'></div>
-          <div id='ship-cruiser' data-ship-type='2'></div>
-          <div id='ship-submarine' data-ship-type='3'></div>
-          <div id='ship-destroyer' data-ship-type='4'></div>
+      <section id='info-panel'>
+        <h2>Drag and drop to place ships. Click on placed ships to rotate.</h2>
+      </section>
+      <section id ='ship-placement-container'>
+        <div id='ship-selection'>
+          <h2>Place your ships!</h2>
+          <div id='ships'>
+            <div id='ship-carrier' data-ship-type='0'></div>
+            <div id='ship-battleship' data-ship-type='1'></div>
+            <div id='ship-cruiser' data-ship-type='2'></div>
+            <div id='ship-submarine' data-ship-type='3'></div>
+            <div id='ship-destroyer' data-ship-type='4'></div>
+          </div>
+          <div id='placement-menu'>
+            <button id="reset-btn">Reset</button>
+            <button id="random-btn">Random</button>
+            <button id="ready-btn" disabled='true'>Ready</button>
+          </div>
         </div>
-        <div id='placement-menu'>
-          <button id="reset-btn">Reset</button>
-          <button id="random-btn">Random</button>
-          <button id="ready-btn" disabled='true'>Ready</button>
-        </div>
-      </div>
-      <div id='ship-board-container'>
-        <div class='ship-board'>
-        </div>
-      </div>     
+        <div id='ship-board-container'>
+          <div class='ship-board'>
+          </div>
+        </div>   
+      </section>  
     </main>
 
     <main id='game'>
