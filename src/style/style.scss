@@ -104,13 +104,16 @@ footer a:hover {
   }
 }
 
+#info-panel {
+  display: flex;
+  justify-content: center;
+}
+
 #game {
   display: none;
   flex-direction: column;
 
   #info-panel {
-    display: flex;
-    justify-content: center;
     h2 {
       display: none;
     }
@@ -230,12 +233,18 @@ footer a:hover {
 
 #ship-placement {
   display: none;
-  gap: 150px;
+  flex-direction: column;
+  gap: 25px;
 
-  @include respond(mobile) {
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
+  #ship-placement-container {
+    display: flex;
+    gap: 150px;
+
+    @include respond(mobile) {
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
   }
 }
 
