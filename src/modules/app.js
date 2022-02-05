@@ -38,7 +38,6 @@ const App = (state) => {
   }
 
   function initGame() {
-    console.log('init game');
     document.querySelector('#game').style.display = 'flex';
     const playerBoardElement = '#player-board-container .game-board';
     const enemyBoardElement = '#enemy-board-container .game-board';
