@@ -105,27 +105,37 @@ const Game = (
     pass.show();
   }
 
+  function playerTurn(player, playerName) {
+    setTurnCallback(player);
+    passDevice(playerName);
+    flipBoards();
+  }
+
   function gameTurn(x, y) {
     if (playerOneTurn && getWinner() === 0) {
       playerOne.attack(x, y, playerTwoBoard);
+      if (getWinner() !== 0) {
+        end();
+        return;
+      }
       nextTurn();
       if (playerTwo.isAi()) {
         update();
         gameTurn();
       } else {
-        setTurnCallback(2);
-        passDevice(playerTwo.name);
-        flipBoards();
+        playerTurn(2, playerTwo.name);
       }
     } else if (!playerOneTurn && getWinner() === 0) {
       playerTwo.attack(x, y, playerOneBoard);
+      if (getWinner() !== 0) {
+        end();
+        return;
+      }
       nextTurn();
       if (playerTwo.isAi()) {
         update();
       } else {
-        setTurnCallback(1);
-        passDevice(playerOne.name);
-        flipBoards();
+        playerTurn(1, playerOne.name);
       }
     } else {
       end();
