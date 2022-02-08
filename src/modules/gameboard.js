@@ -60,6 +60,11 @@ const Gameboard = () => {
     );
   }
 
+  function setBoardCell(x, y, shipType, index) {
+    board[y][x].shipType = shipType;
+    board[y][x].index = index;
+  }
+
   function placeShip(x, y, direction, shipType) {
     const ship = fleet[shipType];
     const shipLength = fleet[shipType].length;
@@ -70,15 +75,13 @@ const Gameboard = () => {
       ship.setDirection('horizontal');
       ship.setPosition(x, y);
       for (let i = 0; i < shipLength; i++) {
-        board[y][x + i].shipType = shipType;
-        board[y][x + i].index = i;
+        setBoardCell(x + i, y, shipType, i);
       }
     } else if (direction === 'vertical') {
       ship.setDirection('vertical');
       ship.setPosition(x, y);
       for (let i = 0; i < shipLength; i++) {
-        board[y + i][x].shipType = shipType;
-        board[y + i][x].index = i;
+        setBoardCell(x, y + i, shipType, i);
       }
     }
     return true;
@@ -196,13 +199,11 @@ const Gameboard = () => {
     const y = pos[1];
     if (ship.getDirection() === 'horizontal') {
       for (let i = 0; i < shipLength; i++) {
-        board[y][x + i].shipType = undefined;
-        board[y][x + i].index = undefined;
+        setBoardCell(x + i, y, undefined, undefined);
       }
     } else if (ship.getDirection() === 'vertical') {
       for (let i = 0; i < shipLength; i++) {
-        board[y + i][x].shipType = undefined;
-        board[y + i][x].index = undefined;
+        setBoardCell(x, y + i, undefined, undefined);
       }
     }
   }
