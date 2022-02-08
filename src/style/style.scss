@@ -37,11 +37,8 @@
   --cell-width: var(--cell-height);
 }
 
-//$bg-color: #4c5760;
 $bg-color: #190018;
-//$ship-color: #879496;
 $ship-color: #f7f500;
-//$app-container-bg: #93a8ac;
 $app-container-bg: #332234;
 $button-color: #a59e8c;
 
@@ -66,14 +63,12 @@ p {
 button {
   outline: none;
   border: none;
-  //background-color: #a59e8c;
   background: rgb(99, 68, 101);
   background: linear-gradient(
     180deg,
     rgba(99, 68, 101, 1) 0%,
     rgba(40, 26, 39, 1) 63%
   );
-  //border: 3px solid #66635b;
   border: 1px solid #d3b5a1;
   color: $font-color;
   border-radius: 5px;
@@ -265,7 +260,6 @@ footer a:hover {
 .ship-board {
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
-  //background-color: black;
   background-color: #a86201;
   gap: 2px;
   padding: 2px;
@@ -276,7 +270,6 @@ footer a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    //background-color: rgb(127, 125, 241);
     background-color: black;
   }
 
@@ -300,20 +293,6 @@ footer a:hover {
     color: red;
   }
 
-  .animated {
-    animation: showElement 0.25s;
-    animation-iteration-count: 1;
-  }
-
-  @keyframes showElement {
-    from {
-      transform: scale(0);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
-
   .miss {
     display: flex;
     align-items: center;
@@ -324,7 +303,6 @@ footer a:hover {
     content: '\D7';
     font-size: calc(var(--cell-height) * 1.6);
     font-weight: bold;
-    //color: black;
     color: #a86201;
   }
 
