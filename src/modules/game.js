@@ -59,7 +59,7 @@ const Game = (
 
   function update() {
     playerBoardUI.updateBoard(playerOneBoard);
-    enemyBoardUI.updateBoard(playerTwoBoard, false);
+    enemyBoardUI.updateBoard(playerTwoBoard, true);
     enemyBoardUI.updateMoveHandlers(playerTwoBoard, userInput);
   }
 
@@ -68,13 +68,13 @@ const Game = (
       playerBoardUI.reset();
       enemyBoardUI.reset();
       playerBoardUI.updateBoard(playerOneBoard);
-      enemyBoardUI.updateBoard(playerTwoBoard, false);
+      enemyBoardUI.updateBoard(playerTwoBoard, true);
       enemyBoardUI.updateMoveHandlers(playerTwoBoard, userInput);
     } else {
       playerBoardUI.reset();
       enemyBoardUI.reset();
       playerBoardUI.updateBoard(playerTwoBoard);
-      enemyBoardUI.updateBoard(playerOneBoard, false);
+      enemyBoardUI.updateBoard(playerOneBoard, true);
       enemyBoardUI.updateMoveHandlers(playerOneBoard, userInput);
     }
   }
