@@ -13,6 +13,7 @@ const Game = (
 ) => {
   const playerBoardElement = '#player-board-container .game-board';
   const enemyBoardElement = '#enemy-board-container .game-board';
+  let isPaused = false;
 
   const playerBoardUI = GameboardDOM(playerBoardElement);
   const enemyBoardUI = GameboardDOM(enemyBoardElement);
@@ -84,9 +85,11 @@ const Game = (
   }
 
   function userInput(event) {
-    let x = Number(event.target.dataset.x);
-    let y = Number(event.target.dataset.y);
-    gameTurn(x, y);
+    if (!isPaused) {
+      let x = Number(event.target.dataset.x);
+      let y = Number(event.target.dataset.y);
+      gameTurn(x, y);
+    }
   }
 
   function aiPlayerMove() {
@@ -105,7 +108,23 @@ const Game = (
     pass.show();
   }
 
-  function playerTurn(player, playerName) {
+  function wait(waitTime) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        isPaused = false;
+        resolve(true);
+      }, waitTime);
+    });
+  }
+
+  async function playerTurn(player, playerName) {
+    isPaused = true;
+    if (player == 1) {
+      enemyBoardUI.updateBoard(playerOneBoard, true);
+    } else {
+      enemyBoardUI.updateBoard(playerTwoBoard, true);
+    }
+    await wait(1500);
     setTurnCallback(player);
     passDevice(playerName);
     flipBoards();
